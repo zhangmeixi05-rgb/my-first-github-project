@@ -1,0 +1,38 @@
+
+<scroll-view class="container" scroll-y="true">
+  <view class="form">
+    <view class="form-item">
+      <text class="label" style="position: relative; left: 0rpx; top: 10rpx; color: #CDBE70">标题：</text>
+      <input style="width: 614rpx; height: 84rpx; display: block; box-sizing: border-box" class="input-title" type="text" placeholder="请输入标题" name="title" bindinput="inputChange" data-field="title"/>
+    </view>
+    <view class="form-item">
+      <text class="label" style="position: relative; left: 4rpx; top: 10rpx; color: #CDBE70">正文：</text>
+      <textarea class="input-content" placeholder="请输入正文" name="content" bindinput="inputChange" data-field="content" style="width: 622rpx; height: 240rpx; display: block; box-sizing: border-box; left: 5rpx; top: 0rpx; position: relative"></textarea>
+    </view>
+    <view class="form-item-row">
+      <view class="form-item half-width">
+        <text class="label" style="color: #CDBE70">日期：</text>
+        <picker mode="date" value="{{date}}" bindchange="dateChange">
+          <view class="picker" style="position: relative; left: 0rpx; top: 43rpx">{{date ? date : '请选择日期'}}</view>
+        </picker>
+      </view>
+      <view class="form-item half-width" style="width: 326rpx; height: 308rpx; display: block; box-sizing: border-box">
+        <text class="label" style="color: #CDBE70">定位：</text>
+        <button class="location-btn" bindtap="chooseLocation" style="width: 286rpx; height: 82rpx; display: inline-block; box-sizing: border-box; left: 0rpx; top: 134rpx; position: relative">选择位置</button>
+        <view class="location" style="position: relative; left: 0rpx; top: -79rpx">{{location ? location.name : '未选择位置'}}</view>
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="label" style="color: #CDBE70">上传图片：</text>
+      <button class="upload-btn" bindtap="chooseImage" style="position: relative; left: 34rpx; top: 28rpx">选择图片</button>
+      <view class="image-preview">
+        <block wx:for="{{images}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill" class="preview-image" />
+        </block>
+      </view>
+    </view>
+    <button class="publish-btn" bindtap="formSubmit">发布</button>
+  </view>
+</scroll-view>
+
+

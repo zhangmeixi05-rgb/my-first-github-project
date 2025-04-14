@@ -1,0 +1,89 @@
+<view class='container'>
+
+<!--头像名称-->
+<view class="partOne"> 
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+</view>
+
+<!--我的资料、设置-->
+<view class="partTwo">
+  <!--我的资料-->
+  <view class="item">
+    <view class="itemname">
+      <view ><image src="/img/my3.jpg" /></view>
+      <view ><text >我的资料</text></view>
+    </view>
+   <view class="right">
+      <navigator open-type="navigate" url="../my_profile/index">
+     <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
+    </navigator>
+      </view>
+  </view>
+       
+  <!--好友-->
+  <view class="scan">
+    <view class="itemname">
+      <view ><image src="/img/my1.jpg" /></view>
+      <view ><text >好友</text></view>
+    </view>
+    <view class="right">
+      <navigator open-type="navigate" url="../my_setting/index">
+     <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
+    </navigator>
+    </view>
+  </view>
+</view>
+
+<!--我发起的、我参与的-->
+<view class="partThree">
+<!--我的发起-->
+<view class="item">
+    <view class="itemname">
+      <view ><image src="/img/my4.jpg" /></view>
+      <view ><text >我发布的</text></view>
+    </view>
+    <view class="right">
+    <navigator open-type="navigate" url="../my_publish/index">
+     <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
+    </navigator>
+    </view>
+  </view>
+  <!--我的日程-->
+  <view class="item">
+    <view class="itemname">
+      <view ><image src="/img/my5.jpg" /></view>
+      <view ><text >我的日程</text></view>
+    </view>
+    <view class="right">
+    <navigator open-type="navigate" url="../my_join/index">
+     <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
+    </navigator>
+    </view>
+  </view>
+  <!--我的收藏-->
+  <view class="item">
+    <view class="itemname">
+      <view ><image src="/img/my6.jpg" /></view>
+      <view ><text >我的收藏</text></view>
+    </view>
+    <view class="right">
+    <navigator open-type="navigate" url="../my_favorite/index">
+     <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
+    </navigator>
+    </view>
+  </view>
+</view>
+
+</view>
+
+

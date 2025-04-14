@@ -1,0 +1,21 @@
+<view class="container" style="width: 750rpx; height: 947rpx; display: flex; box-sizing: border-box">
+  <!-- 搜索起点位置 -->
+  <view class="form-item" style="text-align: -webkit-auto; width: 400rpx; height: 56rpx; display: block; box-sizing: border-box; position: relative; left: 113rpx; top: 26rpx; font-weight: 900; color: #2E8B57">
+  位置选择
+
+    <button bindtap="chooseStartLocation" class="pick" style="position: relative; left: -296rpx; top: 874rpx; width: 340rpx; height: 62rpx; display: block; box-sizing: border-box">选择起点</button>
+    <text class="form-location" style="position: relative; left: -222rpx; top: -26rpx; border-bottom: 2px solid #9ACD32; color: #BEBEBE">{{startLocation.name || '未选择起点位置'}}</text>
+
+  </view>
+
+  <!-- 搜索终点位置 -->
+  <view class="form-item" style="position: relative; left: 164rpx; top: -205rpx">
+
+    <button bindtap="chooseEndLocation" class="pick" style="position: relative; left: 29rpx; top: 1050rpx; width: 340rpx; height: 62rpx; display: block; box-sizing: border-box">选择终点</button>
+    <text class="form-location" style="position: relative; left: -306rpx; top: 218rpx; border-bottom: 2px solid #9ACD32; color: #BEBEBE; font-weight: 900">{{endLocation.name || '未选择终点位置'}}</text>
+  </view>
+
+  <button bindtap="navigate" class="starting" style="position: relative; left: -20rpx; top: 814rpx">开始导航</button>
+
+  <image style="position: relative; left: 0rpx; top: -16rpx; width: 700rpx; border-radius: 8rpx; display: block; box-sizing: border-box; height: 726rpx; border: 10rpx solid #008B45" src="/pages/images/daohang.jpg" />
+  </view>

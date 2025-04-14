@@ -1,0 +1,62 @@
+<view class="head">
+  <view class="title">
+    <swiper indicator-dots='true' autoplay='true' interval='3000' duration='1000' circular='true' class="swip">
+      <block wx:for="{{Imgs}}" wx:for-index="index">
+        <swiper-item>
+          <image src='{{Imgs[index].url}}' mode='widthFix'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+<view class="zijian">
+  <view class="title2">欢迎来到吐司手账</view>
+</view>
+
+<view class="function">
+  <view class="release">
+    <view class="list">
+      <view bindtap="diancan">
+        <image src="/pages/images/yuyue.jpg" class="image3" style="width: 150rpx; height: 150rpx; display: inline-block; box-sizing: border-box"></image>
+      </view>
+      <navigator url="/pages/index/yuyue/yuyue">
+      <view class="button" >
+        预约
+      </view>
+      </navigator>
+    </view>
+    <view class="font" style="color: #CDBE70; font-weight: 500">
+      我要预约
+    </view>
+  </view>
+
+  <view class="release">
+    <view class="list">
+      <view bindtap="ontap">
+        <image src="/pages/images/didian.jpg" class="image3" style="width: 150rpx; height: 150rpx; display: inline-block; box-sizing: border-box"></image>
+      </view>
+      <navigator url="/pages/index/daohang/daohang">
+        <view class="button">
+          导航
+        </view>
+      </navigator>
+    </view>
+    <view class="font" style="color: #CDBE70; font-weight: 500">
+      饭局地点
+    </view>
+  </view>
+</view>
+
+
+
+<view class="announcement" style="color: #CDBE70; font-weight: 700">吐槽区：
+  <view class="list2">
+    <view class="li" bindtap="1" style="color: #CDBE70">南区食堂早餐营业到9:30啦！</view>
+    <view class="divLine"></view>
+    <view class="li" bindtap="2" style="color: #CDBE70">北区食堂惊现预制菜</view>
+    <view class="divLine"></view>
+    <view class="li" bindtap="3" style="color: #CDBE70">地超的水果捞太好吃啦！</view>
+    <view class="divLine"></view>
+  </view>
+</view>

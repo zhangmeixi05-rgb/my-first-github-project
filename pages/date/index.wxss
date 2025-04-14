@@ -1,0 +1,51 @@
+page {
+  /*设置底部安全距离*/
+padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+background: #E0FFFF;
+}
+.container {
+  padding: 20rpx;
+}
+.search-bar{
+  width: 100%;
+  background-color: #99ffcc;
+  height: 65px;
+}
+.search-text{
+  width: 85%;
+  margin-bottom: 12px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+	border-radius: 25rpx;
+  padding: 10rpx;
+  background-color: #98f0c4;
+}
+.search-btn{
+  background-color: rgb(161, 212, 161);
+}
+.columns{
+  width: 96%;
+}
+.left-column, .right-column {
+  margin-top: 20px;
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.post {
+  margin-bottom: 20rpx;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.post image {
+  width: 100%;
+  height: 400rpx;
+}
+.post text {
+  display: block;
+  padding: 10rpx;
+}

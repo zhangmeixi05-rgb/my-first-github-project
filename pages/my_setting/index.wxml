@@ -1,0 +1,36 @@
+<view class="container" style="width: 750rpx; height: 1204rpx; display: flex; box-sizing: border-box">
+  <view class="search-bar">
+    <input type="text" placeholder="搜索好友" value="{{searchQuery}}" bindinput="onSearchInput" />
+    <button bindtap="searchFriend" style="width: 186rpx; height: 64rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx; background: #79CDCD; color: white">搜索</button>
+  </view>
+
+  <block wx:if="{{searchResult}}">
+    <view class="search-result" bindtap="addFriend" data-user="{{searchResult}}">
+      <image class="avatar" src="{{searchResult.avatarUrl}}" mode="aspectFill"></image>
+      <text class="nickname">{{searchResult.nickName}}</text>
+    </view>
+  </block>
+
+  <view class="new-friends" style="position: relative; left: -216rpx; top: -225rpx">
+    <text style="position: relative; left: 0rpx; top: -70rpx; font-size: 900; font-weight: bold; border-bottom: 4rpx solid #5F9EA0; color: #53868B">新的朋友</text>
+    <block wx:for="{{newFriendRequests}}" wx:key="userId">
+      <view class="new-friend-item" bindtap="navigateToNewFriends" data-id="{{item.userId}}">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+        <text class="nickname">{{item.nickName}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="friends-list">
+    <text style="position: relative; left: -144rpx; top: 40rpx; font-size: 900; font-weight: bold; border-bottom: 4rpx solid #5F9EA0; color: #53868B">好友列表</text>
+    <block wx:for="{{friends}}" wx:key="id">
+      <view class="friend-item" style="position: relative; left: -144rpx; top: 74rpx">
+        <view bindtap="navigateToChat" data-id="{{item.id}}" data-nickname="{{item.nickName}}" style="position: relative; left: -20rpx; top: 1rpx; corlor: #53868B">
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+          <text class="nickname" style="color: #53868B">{{item.nickName}}</text>
+        </view>
+        <button wx:if="{{item.id !== 'system' && item.id !== userInfo.studentId}}" bindtap="deleteFriend" data-id="{{item.id}}">删除好友</button>
+      </view>
+    </block>
+  </view>
+</view>
