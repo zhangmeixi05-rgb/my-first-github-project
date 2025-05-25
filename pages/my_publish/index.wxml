@@ -2,7 +2,7 @@
   <view class="columns">
     <view class="left-column">
       <block wx:for="{{leftColumn}}" wx:key="id">
-        <view class="post" data-id="{{item.id}}" bindtap="viewDetail">
+        <view class="post" data-id="{{item._id}}" bindtap="viewDetail">
           <image src="{{item.images[0]}}" mode="aspectFill"></image>
           <text>{{item.title}}</text>
         </view>
@@ -10,7 +10,7 @@
     </view>
     <view class="right-column">
       <block wx:for="{{rightColumn}}" wx:key="id">
-        <view class="post" data-id="{{item.id}}" bindtap="viewDetail">
+        <view class="post" data-id="{{item._id}}" bindtap="viewDetail">
           <image src="{{item.images[0]}}" mode="aspectFill"></image>
           <text>{{item.title}}</text>
         </view>

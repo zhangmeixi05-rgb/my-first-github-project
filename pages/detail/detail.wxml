@@ -2,11 +2,8 @@
   <!-- 发布者信息和定位显示 -->
   <view class="user-location">
     <view class="user-info">
-      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
-      <text class="username">{{userInfo.nickName}}</text>
-    </view>
-    <view class="location" bindtap="navigateToDaohang">
-      <text>位置：{{post.location.name}}</text>
+      <image class="avatar" src="{{post.avatar}}" mode="aspectFill" />
+      <text class="username">{{post.nickName}}</text>
     </view>
   </view>
   
@@ -21,7 +18,7 @@
   
   <!-- 标题和正文 -->
   <view class="content">
-    <view class="title">餐厅：{{post.title}}</view>
+    <view class="title">{{post.title}}</view>
     <view class="text">{{post.content}}</view>
   </view>
 
@@ -32,7 +29,7 @@
       <text class="tab-text">{{isFavorited ? '取消收藏' : '收藏'}}</text>
       <text class="tab-counter">{{favoriteCount}}</text>
     </view>
-    <view class="tab" wx:if="{{source === 'my_publish'}}" bindtap="deletePost">
+    <view class="tab" wx:if="{{source === 'my_publish'}}" data-id="{{post._id}}"  bindtap="deletePost">
       <image src="/img/pdet.png" class="tab-icon" />
       <text class="tab-text">删除帖子</text>
     </view>

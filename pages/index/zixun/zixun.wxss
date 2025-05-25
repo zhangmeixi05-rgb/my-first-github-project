@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ededed;
+}
+
+/* 聊天区域 */
+.chat-area {
+  flex: 1;
+  padding: 10rpx 0;
+  background-color: #f5f5f5;
+}
+
+/* 消息项 */
+.message-item {
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+}
+
+.message-item.user {
+  flex-direction: row-reverse;
+}
+
+/* 头像 */
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 6rpx;
+}
+
+/* 消息内容 */
+.message-content {
+  max-width: 70%;
+  margin: 0 20rpx;
+}
+
+/* 普通消息 */
+.message-text {
+  padding: 16rpx 20rpx;
+  border-radius: 6rpx;
+  font-size: 32rpx;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.user .message-text {
+  background-color: #95ec69;
+}
+
+.assistant .message-text {
+  background-color: #fff;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 分析结果特殊样式 */
+.analysis-result {
+  padding: 20rpx;
+  background-color: #f0f8ff;
+  border-left: 4rpx solid #1890ff;
+  border-radius: 6rpx;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* 时间 */
+.message-time {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+  text-align: right;
+}
+
+/* 输入区域 */
+.input-area {
+  display: flex;
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  border-top: 1rpx solid #e5e5e5;
+  align-items: center;
+}
+
+.input-box {
+  flex: 1;
+  padding: 18rpx 25rpx;
+  border-radius: 40rpx;
+  background-color: #fff;
+  margin-right: 20rpx;
+  font-size: 30rpx;
+}
+
+.send-btn {
+  margin: 0;
+  padding: 0 30rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 6rpx;
+  background-color: #07c160;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.send-btn[disabled] {
+  background-color: #9ed4a8;
+  opacity: 0.7;
+}
+
+/* 错误提示 */
+.api-error {
+  background-color: #fff2f0;
+  color: #ff4d4f;
+  padding: 15rpx;
+  text-align: center;
+  font-size: 26rpx;
+  border-bottom: 1rpx solid #ffccc7;
+}

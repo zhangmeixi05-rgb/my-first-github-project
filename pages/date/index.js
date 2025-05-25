@@ -8,20 +8,38 @@ Page({
   },
 
   onLoad() {
-    this.loadPosts();
+    // this.loadPosts();
   },
 
   onShow() {
     this.loadPosts(); // 确保页面显示时加载最新数据
   },
 
-  loadPosts() {
-    const posts = wx.getStorageSync('posts') || [];
-    this.setData({
-      posts,
-      filteredPosts: posts
+   loadPosts() {
+    const db = wx.cloud.database();
+     db.collection('posts').get({
+       success: res => {
+        console.log('获取数据成功', res.data);
+        // 在这里处理返回的数据
+        this.setData({
+          posts:res.data,
+          filteredPosts:res.data
+        })
+       wx.setStorageSync('posts', res.data)
+        console.log(this.data.posts);
+        this.search()
+      },
+      fail: err => {
+        console.error('获取数据失败', err);
+        // 处理失败情况
+      }
     });
-    this.splitColumns(posts);
+    // const posts = wx.getStorageSync('posts') || [];
+    // this.setData({
+    //   posts,
+    //   filteredPosts: posts
+    // });
+    this.splitColumns(this.data.posts);
   },
 
   inputChange(e) {
@@ -62,6 +80,7 @@ Page({
   },
 
   viewDetail(e) {
+    console.log(e);
     const postId = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: `/pages/detail/detail?id=${postId}`

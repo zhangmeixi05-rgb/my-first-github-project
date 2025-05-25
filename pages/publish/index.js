@@ -2,8 +2,6 @@ Page({
   data: {
     title: '',
     content: '',
-    date: '',
-    location: null,
     images: [],
     username: '', // 添加用户名
     avatar: '', // 添加头像
@@ -12,6 +10,8 @@ Page({
   },
 
   onLoad(options) {
+
+    // console.log(userInfo);
     const currentDate = new Date().toISOString().split('T')[0];
     this.setData({
       currentDate,
@@ -36,8 +36,6 @@ Page({
       this.setData({
         title: post.title,
         content: post.content,
-        date: post.date,
-        location: post.location,
         images: post.images,
         username: post.username,
         avatar: post.avatar
@@ -47,25 +45,61 @@ Page({
 
   chooseImage() {
     const self = this;
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success(res) {
-        self.setData({
-          images: res.tempFilePaths
+    wx.chooseMedia().then(res=>{
+      this.uploadImageToCloud(res.tempFiles[0])
+    }).catch(err=>{
+      console.log("用户取消了上传");
+    })
+    // wx.chooseImage({
+    //   count: 9,
+    //   sizeType: ['original', 'compressed'],
+    //   sourceType: ['album', 'camera'],
+    //   success(res) {
+    //     self.setData({
+    //       images: res.tempFilePaths
+    //     });
+    //   }
+    // });
+  },
+  uploadImageToCloud(file) {
+    wx.showLoading({
+      title: '上传中...', // 加载提示框的标题
+      mask: true // 是否显示透明蒙层，防止触摸穿透
+    });
+    const cloudPath = 'images/' + Date.now() + '-' + Math.floor(Math.random() * 1000); // 云存储路径
+    // 上传图片
+    // const { phone, sex, nickName } = this.data.info; 
+    wx.cloud.uploadFile({
+      cloudPath: cloudPath +'.png',
+      filePath: file.tempFilePath, // 小程序临时文件路径
+      success: (res) => {
+        const imageUrl = res.fileID; // 获取上传成功后的图片在云存储中的地址
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 2000 // 提示持续时间为 2 秒
         });
-      }
+        let arr = this.data.images;
+        arr.push(imageUrl);
+        console.log(arr);
+        // 更新图片列表
+        this.setData({
+          images:arr,
+        });
+
+      },
+      fail: (err) => {
+        console.error('上传失败', err);
+        // 可以根据业务需求进行错误处理
+      },
     });
   },
-
   inputChange(e) {
     const { field } = e.currentTarget.dataset;
     this.setData({
       [field]: e.detail.value
     });
   },
-
   dateChange(e) {
     this.setData({
       date: e.detail.value
@@ -120,16 +154,17 @@ Page({
   },
 
   formSubmit() {
-    const { title, content, date, location, images, username, avatar, isEditing, postId } = this.data;
+    const { title, content, images, username, avatar, isEditing, postId } = this.data;
 
-    if (!title || !content || !date || !location || images.length === 0) {
+    if (!title || !content ||  images.length === 0) {
       wx.showToast({
-        title: '请填写所有字段并选择日期、位置，并上传至少一张图片',
+        title: '请填写所有字段并上传至少一张图片',
         icon: 'none'
       });
       return;
     }
-
+    let userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo);
     let posts = wx.getStorageSync('posts') || [];
 
     if (isEditing) {
@@ -140,25 +175,49 @@ Page({
           title,
           content,
           images,
-          date,
-          location,
-          username,
-          avatar
+          nickName:userInfo.nickName,
+          avatar:userInfo.avatarUrl,
+          userId:userInfo._id
         };
+        wx.cloud.callFunction({
+          name:"card-list",
+          data:{
+            title,
+            content,
+            images,
+            nickName:userInfo.nickName,
+            avatar:userInfo.avatarUrl,
+            userId:userInfo._id
+          }
+        }).then(res=>{
+          console.log(res);
+        })
       }
     } else {
       posts.push({
         title,
         content,
         images,
-        date,
-        location,
-        username, // 存储用户名
-        avatar, // 存储头像
-        id: new Date().getTime(),
+        nickName:userInfo.nickName,
+        avatar:userInfo.avatarUrl,
+        userId:userInfo._id,
         favorites: 0,
         userId: wx.getStorageSync('userId') // 存储用户ID
       });
+      wx.cloud.callFunction({
+        name:"card-list",
+        data:{
+          title,
+          content,
+          images,
+
+          nickName:userInfo.nickName,
+          avatar:userInfo.avatarUrl,
+          userId:userInfo._id
+        }
+      }).then(res=>{
+        console.log(res);
+      })
     }
 
     wx.setStorageSync('posts', posts);

@@ -1,0 +1,37 @@
+.container {
+  padding: 40rpx;
+}
+
+.form-group {
+  margin-bottom: 40rpx;
+}
+
+.form-group text {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.register-btn {
+  margin-top: 30rpx;
+}
+
+.login-tip {
+  margin-top: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.login-link {
+  color: #007aff;
+  margin-left: 10rpx;
+}

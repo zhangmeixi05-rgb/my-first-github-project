@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/login/index",
+    "pages/register/index",
     "pages/index/index",
     "pages/message/index",
     "pages/date/index",
@@ -10,11 +12,13 @@
     "pages/my_publish/index",
     "pages/my_join/index",
     "pages/my_favorite/index",
-    "pages/index/yuyue/yuyue",
+    "pages/index/zixun/zixun",
     "pages/index/daohang/daohang",
     "pages/detail/detail",
     "pages/chat/chat",
-    "pages/newfriends/index"
+    "pages/newfriends/index",
+    "pages/track/track",
+    "pages/trend/trend"
   ],
   "window": {
     "navigationBarTextStyle": "black",

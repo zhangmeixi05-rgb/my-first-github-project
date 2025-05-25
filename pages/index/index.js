@@ -11,6 +11,9 @@ Page({
       },
       {
         url: '/pages/images/swiper/3.jpg'
+      },
+      {
+        url: '/pages/images/swiper/4.jpg'
       }
     ],
   },

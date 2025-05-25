@@ -32,7 +32,7 @@ Page({
     let leftColumn = [];
     let rightColumn = [];
 
-    posts.forEach((post, index) => {
+    posts.forEach((post, index) => { // 修正了posts -> post
       if (index % 2 === 0) {
         leftColumn.push(post);
       } else {
@@ -49,7 +49,7 @@ Page({
   viewDetail(e) {
     const postId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${postId}`
+      url: `/pages/detail/detail?id=${postId}&source=favorites` // 增加 source 参数用于标记来源
     });
   }
 });

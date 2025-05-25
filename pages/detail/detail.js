@@ -4,7 +4,7 @@ Page({
     postId: '',
     isFavorited: false,
     favoriteCount: 0,
-    source: '',
+    source: '', // 新增 source 字段，用于记录页面来源
     userInfo: {
       avatarUrl: '',
       nickName: ''
@@ -12,11 +12,12 @@ Page({
   },
 
   onLoad(options) {
+    console.log(options);
     this.loadFavoriteStatus();
     const postId = options.id;
     this.setData({
       postId,
-      source: options.source || ''
+      source: options.source || '' // 从参数中获取 source
     });
     this.loadDetail(postId);
 
@@ -29,9 +30,10 @@ Page({
     }
 
     const posts = wx.getStorageSync('posts') || [];
-    const post = posts.find(p => p.id === Number(postId));
-
+    console.log(posts);
+    const post = posts.find(p => p._id === Number(postId));
     if (post) {
+
       this.setData({
         post,
         isFavorited: wx.getStorageSync(`favorite_${postId}`) || false
@@ -45,26 +47,26 @@ Page({
 
   toggleFavorite() {
     const isFavorited = !this.data.isFavorited;
-    const postId = this.data.post.id;
-  
+    const postId = this.data.post._id;
+
     this.setData({
       isFavorited,
       favoriteCount: Math.max(isFavorited ? this.data.favoriteCount + 1 : this.data.favoriteCount - 1, 0)
     });
-  
+
+    // 更新本地存储的收藏状态和收藏计数
     wx.setStorageSync(`favorite_${postId}`, isFavorited);
     wx.setStorageSync(`favoriteCount_${postId}`, this.data.favoriteCount);
-  
+
+    // 更新收藏帖子列表
     let favoritePosts = wx.getStorageSync('favoritePosts') || [];
     if (isFavorited) {
-      // 添加到收藏页面
       favoritePosts.push(this.data.post);
     } else {
-      // 从收藏页面移除
-      favoritePosts = favoritePosts.filter(post => post.id !== postId);
+      favoritePosts = favoritePosts.filter(post => post._id !== postId);
     }
     wx.setStorageSync('favoritePosts', favoritePosts);
-  
+
     // 通知收藏页面刷新
     const pages = getCurrentPages();
     if (pages.length > 1) {
@@ -73,13 +75,13 @@ Page({
         prevPage.updateFavoritePosts(favoritePosts);
       }
     }
-  
+
     wx.showToast({
       title: isFavorited ? '收藏成功' : '取消收藏',
       icon: 'success'
     });
   },
-  
+
   addFavorite(postId) {
     let favoritePosts = wx.getStorageSync('favoritePosts') || [];
     favoritePosts.push(this.data.post);
@@ -88,7 +90,7 @@ Page({
 
   removeFavorite(postId) {
     let favoritePosts = wx.getStorageSync('favoritePosts') || [];
-    favoritePosts = favoritePosts.filter(post => post.id !== postId);
+    favoritePosts = favoritePosts.filter(post => post._id !== postId); // 修正为 _id
     wx.setStorageSync('favoritePosts', favoritePosts);
 
     // 通知收藏页面刷新
@@ -99,8 +101,9 @@ Page({
     }
   },
 
-  deletePost() {
-    const postId = this.data.post.id;
+  deletePost(e) {
+    console.log(e);
+    const postId = e.currentTarget.dataset.id;
     wx.showModal({
       title: '确认删除',
       content: '是否确认删除帖子？',
@@ -114,12 +117,20 @@ Page({
   },
 
   removePost(postId) {
+    console.log(postId);
     let posts = wx.getStorageSync('posts') || [];
-    posts = posts.filter(p => p.id !== postId);
+    posts = posts.filter(p => p._id !== postId);
     wx.setStorageSync('posts', posts);
-
+    wx.cloud.callFunction({
+      name: 'delete-card', // 替换为你的云函数名称
+      data: {
+        _id: postId
+      }
+    }).then(res => {
+      console.log(res);
+    })
     let favoritePosts = wx.getStorageSync('favoritePosts') || [];
-    favoritePosts = favoritePosts.filter(p => p.id !== postId);
+    favoritePosts = favoritePosts.filter(p => p._id !== postId);
     wx.setStorageSync('favoritePosts', favoritePosts);
 
     // 刷新页面
@@ -136,7 +147,7 @@ Page({
     wx.switchTab({
       url: '/pages/message/index'
     });
-  },  
+  },
 
   navigateToDaohang() {
     const location = this.data.post.location;
@@ -147,7 +158,7 @@ Page({
 
   loadDetail(postId) {
     const posts = wx.getStorageSync('posts') || [];
-    const post = posts.find(p => p.id === Number(postId));
+    const post = posts.find(p => p._id === postId);
     const favoriteCount = wx.getStorageSync(`favoriteCount_${postId}`) || 0;
     this.setData({
       post,

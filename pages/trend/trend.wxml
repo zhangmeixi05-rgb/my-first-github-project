@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="header">
+    <text class="title">{{currentYear}}年{{currentMonth}}月 情绪统计</text>
+    <view class="controls">
+      <button bindtap="prevMonth">上个月</button>
+      <button bindtap="nextMonth">下个月</button>
+    </view>
+  </view>
+
+  <canvas canvas-id="trendCanvas" class="chart-canvas"></canvas>
+
+  <view class="analysis-box">
+    <text class="analysis-text">{{analysisText}}</text>
+  </view>
+</view>

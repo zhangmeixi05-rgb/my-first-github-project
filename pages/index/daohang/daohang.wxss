@@ -1,42 +1,31 @@
-/* 样式定义 */
 page {
-  /*设置底部安全距离*/
-padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
-padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
-background: #F0F8FF;
-}
-.container {
-  padding: 20px;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFECF5;
 }
 
-.form-item {
-  margin-bottom: 20px;
-  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 20rpx;
 }
-.form-location{
-  font-size: 18px;
+
+.card {
+  width: 80%;
+  background-color: #fff7fa;
+  margin: 20rpx 0;
+  padding: 40rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 10rpx 20rpx rgba(255, 192, 203, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 32rpx;
+  color: #ff69b4;
 }
-.form-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 13px;
-}
-.pick{
-  width: 100%;
-  padding: 6px;
-  background-color: #9ae2d0;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-}
-.starting {
-  width: 100%;
-  padding: 10px;
-  background-color: #72cc89;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
 }

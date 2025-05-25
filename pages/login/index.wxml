@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="form-item">
+    <text>用户名</text>
+    <input placeholder="请输入用户名" bindinput="onUsernameInput" />
+  </view>
+  <view class="form-item">
+    <text>密码</text>
+    <input placeholder="请输入密码" password bindinput="onPasswordInput" />
+  </view>
+  <button type="primary" bindtap="onLogin">登录</button>
+  <navigator open-type="navigate" url="/pages/register/index">
+  <button bindtap="goToRegister">没有账号？去注册</button></navigator>
+</view>

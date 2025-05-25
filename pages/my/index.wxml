@@ -58,14 +58,14 @@
     </navigator>
     </view>
   </view>
-  <!--我的日程-->
+  <!--心情地图-->
   <view class="item">
     <view class="itemname">
       <view ><image src="/img/my5.jpg" /></view>
-      <view ><text >我的日程</text></view>
+      <view ><text >心情地图</text></view>
     </view>
     <view class="right">
-    <navigator open-type="navigate" url="../my_join/index">
+    <navigator open-type="navigate" url="/pages/index/daohang/daohang">
      <button plain="true" class="imageSkip"><image src="/img/my2.jpg"></image></button>
     </navigator>
     </view>
@@ -83,7 +83,10 @@
     </view>
   </view>
 </view>
-
+<view class="logout-area">
+  <navigator open-type="navigate" url="/pages/login/index">
+    <button class="logout-btn" type="warn" bindtap="logout">退出登录</button></navigator>
+  </view>
 </view>
 
 

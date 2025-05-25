@@ -43,7 +43,7 @@ Page({
     if (this.data.friendInfo.id === 'system') {
       const systemReply = {
         from: '系统消息',
-        content: '欢迎来到吐司手账！',
+        content: '欢迎来到小情绪事务所！',
         type: 'text',
         time: new Date().toLocaleTimeString(),
         avatar: '/img/xtxx.jpg'
