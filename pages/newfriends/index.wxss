@@ -1,9 +1,10 @@
 page {
-  /*设置底部安全距离*/
-padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
-padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
-background:#FFF0F5;
+  /* 设置底部安全距离 */
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFF0F5;
 }
+
 .container {
   display: flex;
   flex-direction: column;

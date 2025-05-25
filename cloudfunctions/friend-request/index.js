@@ -3,33 +3,32 @@ cloud.init();
 const db = cloud.database();
 
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext();
-  const openid = wxContext.OPENID;
+  const { userId } = event;
 
-  if (!openid) {
+  if (!userId) {
     return {
-      errorCode: 1,
-      errorMessage: 'openid 获取失败'
+      success: false,
+      message: '缺少 userId'
     };
   }
 
   try {
     const res = await db.collection('fellow')
       .where({
-        friendId: openid,
+        friendId: userId,
         isAgree: false
       })
       .get();
 
+      return {
+        success: true,
+        data: res.data // 而不是 requests
+      };
+      
+  } catch (error) {
     return {
-      errorCode: 0,
-      data: res.data
-    };
-  } catch (err) {
-    return {
-      errorCode: -1,
-      errorMessage: err.message,
-      stackTrace: err.stack
+      success: false,
+      message: error.message
     };
   }
 };
