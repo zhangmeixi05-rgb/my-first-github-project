@@ -1,6 +1,6 @@
 <view class="head">
   <view class="title">
-    <swiper indicator-dots='true' autoplay='true' interval='3000' duration='1000' circular='true' class="swip">
+    <swiper indicator-dots='true' autoplay='true' interval='4000' duration='1000' circular='true' class="swip">
       <block wx:for="{{Imgs}}" wx:for-index="index">
         <swiper-item>
           <image src='{{Imgs[index].url}}' mode='widthFix'></image>
@@ -27,7 +27,7 @@
       </navigator>
     </view>
     <view class="font" style="color: #CDBE70; font-weight: 500">
-      Deepseek智能分析
+      情感分析
     </view>
   </view>
 
@@ -38,12 +38,12 @@
       </view>
       <navigator url="/pages/index/daohang/daohang">
         <view class="button">
-          导航
+          日记
         </view>
       </navigator>
     </view>
     <view class="font" style="color: #CDBE70; font-weight: 500">
-      饭局地点
+      心情地图
     </view>
   </view>
 </view>

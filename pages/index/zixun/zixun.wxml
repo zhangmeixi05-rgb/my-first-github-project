@@ -1,10 +1,10 @@
 <view class="container">
   <!-- 网络状态提示 -->
   <view wx:if="{{apiError}}" class="api-error">
-    <text>网络连接不稳定，正在尝试重连...</text>
+    <text>⚠️ 网络连接不稳定，正在尝试重连...</text>
   </view>
 
-  <!-- 聊天消息区域 -->
+  <!-- 聊天区域 -->
   <scroll-view 
     scroll-y 
     scroll-with-animation 
@@ -14,44 +14,37 @@
   >
     <block wx:for="{{messages}}" wx:key="id">
       <view class="message-item {{item.role}}">
+        <!-- 头像 -->
         <image 
           class="avatar" 
           src="{{item.role === 'user' ? (userAvatar || '/pages/images/moren.png') : '/pages/images/logo.png'}}"
           mode="aspectFill"
-        ></image>
+        />
+
+        <!-- 消息内容区域 -->
         <view class="message-content">
+          <!-- 正在分析 -->
+          <view wx:if="{{item.isThinking}}" class="message-text thinking-message">
+            <text>正在分析中</text><text class="thinking-dots">...</text>
+          </view>
+
+          <!-- 分析结果 -->
+          <view wx:elif="{{item.isAnalysisResult}}" class="analysis-result">
+            {{item.content}}
+          </view>
+
           <!-- 普通消息 -->
-          <view 
-            wx:if="{{!item.isThinking && !item.isAnalysisResult}}"
-            class="message-text"
-          >
+          <view wx:else class="message-text">
             {{item.content}}
           </view>
-          
-          <!-- 分析结果消息 -->
-          <view 
-            wx:if="{{!item.isThinking && item.isAnalysisResult}}"
-            class="analysis-result"
-          >
-            {{item.content}}
-          </view>
-          
-          <!-- 正在输入提示 -->
-          <view 
-            wx:if="{{item.isThinking}}" 
-            class="message-text thinking-message"
-          >
-            <text>正在分析中...</text>
-            <text class="thinking-dots">...</text>
-          </view>
-          
+
           <view class="message-time">{{item.time}}</view>
         </view>
       </view>
     </block>
   </scroll-view>
-  
-  <!-- 输入区域 -->
+
+  <!-- 输入框 -->
   <view class="input-area">
     <input 
       type="text" 

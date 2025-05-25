@@ -1,3 +1,8 @@
+page {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFECF5;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -46,7 +51,7 @@
 }
 
 .user .message-text {
-  background-color: #95ec69;
+  background-color: #FFD0FF;
 }
 
 .assistant .message-text {
@@ -96,7 +101,7 @@
   height: 72rpx;
   line-height: 72rpx;
   border-radius: 6rpx;
-  background-color: #07c160;
+  background-color: #E6CAFF;
   color: #fff;
   font-size: 28rpx;
 }
