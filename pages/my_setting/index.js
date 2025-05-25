@@ -41,28 +41,38 @@ Page({
   },
 
   searchFriend() {
-    const query = this.data.searchQuery;
+    const query = this.data.searchQuery.trim();
     const userInfo = this.data.userInfo;
-    const allUsers = wx.getStorageSync('allUsers') || [];
-
-    if (!allUsers.find(user => user.id === userInfo.studentId)) {
-      allUsers.push({
-        id: userInfo.studentId,
-        avatarUrl: userInfo.avatarUrl,
-        nickName: userInfo.nickName,
-        phoneNumber: userInfo.phoneNumber,
-        studentId: userInfo.studentId
+  
+    if (!query) {
+      wx.showToast({ title: '请输入关键词', icon: 'none' });
+      return;
+    }
+  
+    wx.cloud.database().collection('users')
+      .where({
+        // 使用正则进行模糊匹配，忽略大小写
+        _id: wx.cloud.database().command.neq(userInfo._id), // 排除自己
+        // 使用或逻辑，匹配任意字段
+        $or: [
+          { nickName: wx.cloud.database().RegExp({ regexp: query, options: 'i' }) },
+          { phoneNumber: wx.cloud.database().RegExp({ regexp: query, options: 'i' }) },
+          { studentId: wx.cloud.database().RegExp({ regexp: query, options: 'i' }) }
+        ]
+      })
+      .get()
+      .then(res => {
+        if (res.data.length > 0) {
+          this.setData({ searchResult: res.data[0] }); // 只展示第一个结果
+        } else {
+          this.setData({ searchResult: null });
+          wx.showToast({ title: '未找到用户', icon: 'none' });
+        }
+      })
+      .catch(err => {
+        console.error('搜索失败', err);
+        wx.showToast({ title: '搜索失败', icon: 'none' });
       });
-      wx.setStorageSync('allUsers', allUsers);
-    }
-
-    const searchResult = allUsers.find(user => user.nickName.includes(query) || user.phoneNumber.includes(query) || user.studentId.includes(query));
-
-    if (searchResult) {
-      this.setData({ searchResult: searchResult });
-    } else {
-      wx.showToast({ title: '未找到用户', icon: 'none' });
-    }
   },
 
   addFriend(e) {
