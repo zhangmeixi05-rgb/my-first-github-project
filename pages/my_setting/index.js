@@ -12,7 +12,7 @@ Page({
     this.setData({
       userInfo: userInfo
     });
-    this.loadFriends();
+    this.loadFriendsFromCloud();
     this.loadFriendRequests();
   },
 
@@ -135,6 +135,37 @@ Page({
     });
   },
 
+  loadFriendsFromCloud() {
+    const userInfo = this.data.userInfo;
+    if (!userInfo || !userInfo._id) return;
+  
+    const db = wx.cloud.database();
+    db.collection('friend')
+      .where({ userId: userInfo._id })  // 查询当前用户的所有好友
+      .get()
+      .then(res => {
+        const friendList = res.data.map(item => ({
+          id: item.friendId,
+          avatarUrl: item.avatarUrl,
+          nickName: item.nickName
+        }));
+  
+        const systemInfo = { id: 'system', avatarUrl: '/img/xtxx.jpg', nickName: '系统消息' };
+        const ownInfo = { id: userInfo.studentId, avatarUrl: userInfo.avatarUrl, nickName: '我' };
+  
+        this.setData({
+          friends: [systemInfo, ownInfo, ...friendList]
+        });
+  
+        // 可选：同步本地缓存
+        wx.setStorageSync('friends', friendList);
+      })
+      .catch(err => {
+        console.error('加载好友列表失败', err);
+        wx.showToast({ title: '加载好友失败', icon: 'none' });
+      });
+  },
+  
   deleteFriend(e) {
     const friendId = e.currentTarget.dataset.id;
     wx.showModal({
