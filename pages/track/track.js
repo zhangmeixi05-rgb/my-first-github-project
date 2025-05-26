@@ -1,18 +1,25 @@
 Page({
   data: {
-    currentYear: 2025,
-    currentMonth: 4,
+    userId: '',
+    currentYear: new Date().getFullYear(),
+    currentMonth: new Date().getMonth() + 1,
     calendar: [],
     emotions: {}
   },
 
   onLoad: function () {
-    const today = new Date();
+    const user = wx.getStorageSync('userInfo');
+    if (!user || !user._id) {
+      wx.showToast({ title: '请先登录', icon: 'error' });
+      return;
+    }
     this.setData({
-      currentYear: today.getFullYear(),
-      currentMonth: today.getMonth() + 1
+      userId: user._id,
+      currentYear: new Date().getFullYear(),
+      currentMonth: new Date().getMonth() + 1
     }, () => {
       this.generateCalendar();
+      this.loadEmotions();
     });
   },
 
@@ -77,6 +84,22 @@ Page({
     const key = this.getDateKey(date);
     emotions[key] = emoji;
     this.setData({ emotions });
+
+    wx.cloud.callFunction({
+      name: 'saveEmotion',
+      data: {
+        userId: this.data.userId,
+        date: key,
+        emotion: emoji
+      },
+      success: res => {
+        wx.showToast({ title: '保存成功', icon: 'success' });
+      },
+      fail: err => {
+        wx.showToast({ title: '保存失败', icon: 'none' });
+        console.error('saveEmotion失败', err);
+      }
+    });
   },
 
   removeEmotion(date) {
@@ -84,6 +107,53 @@ Page({
     const key = this.getDateKey(date);
     delete emotions[key];
     this.setData({ emotions });
+
+    wx.cloud.callFunction({
+      name: 'removeEmotion',
+      data: {
+        userId: this.data.userId,
+        date: key
+      },
+      success: res => {
+        wx.showToast({ title: '删除成功', icon: 'success' });
+      },
+      fail: err => {
+        wx.showToast({ title: '删除失败', icon: 'none' });
+        console.error('removeEmotion失败', err);
+      }
+    });
+  },
+
+  loadEmotions() {
+    console.log('loadEmotions userId:', this.data.userId);
+    if (!this.data.userId) {
+      wx.showToast({ title: '用户ID不存在，无法加载情绪', icon: 'none' });
+      return;
+    }
+    wx.cloud.callFunction({
+      name: 'getEmotions',
+      data: {
+        userId: this.data.userId
+      },
+      success: res => {
+        console.log('getEmotions返回:', res);
+        if (res.result && res.result.data) {
+          const emotions = {};
+          res.result.data.forEach(item => {
+            emotions[item.date] = item.emotion;
+          });
+          this.setData({ emotions });
+        } else if (res.result && res.result.errorCode !== 0) {
+          wx.showToast({ title: res.result.errorMessage || '查询失败', icon: 'none' });
+        } else {
+          wx.showToast({ title: '没有查询到数据', icon: 'none' });
+        }
+      },
+      fail: err => {
+        wx.showToast({ title: '加载历史打卡失败', icon: 'none' });
+        console.error('getEmotions失败', err);
+      }
+    });
   },
 
   prevMonth() {
@@ -94,7 +164,10 @@ Page({
     } else {
       currentMonth--;
     }
-    this.setData({ currentYear, currentMonth }, this.generateCalendar);
+    this.setData({ currentYear, currentMonth }, () => {
+      this.generateCalendar();
+      this.loadEmotions();
+    });
   },
 
   nextMonth() {
@@ -105,6 +178,9 @@ Page({
     } else {
       currentMonth++;
     }
-    this.setData({ currentYear, currentMonth }, this.generateCalendar);
+    this.setData({ currentYear, currentMonth }, () => {
+      this.generateCalendar();
+      this.loadEmotions();
+    });
   }
 });
