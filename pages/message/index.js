@@ -4,17 +4,44 @@ Page({
     friends: []
   },
 
-  onLoad() {
+  async onLoad() {
     const userInfo = wx.getStorageSync('userInfo');
-    const storedFriends = wx.getStorageSync('friends') || [];
+
+    if (!userInfo || !userInfo._id) {
+      console.error('未获取到用户信息或用户_id');
+      return;
+    }
+
     const systemInfo = { id: 'system', nickName: '系统消息', avatarUrl: '/img/xtxx.jpg' };
-    const ownInfo = { id: userInfo.studentId, nickName: '我', avatarUrl: userInfo.avatarUrl };
+    const ownInfo = { id: userInfo._id, nickName: '我', avatarUrl: userInfo.avatarUrl || '/img/default-avatar.png' };
 
-    // Filter out any existing system and own info to avoid duplicates
-    let friends = storedFriends.filter(friend => friend.id !== 'system' && friend.id !== userInfo.studentId);
+    let dbFriends = [];
 
-    // Ensure system and user info are always included
-    friends = [systemInfo, ownInfo, ...friends];
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'get-simple-friends',
+        data: { userId: userInfo._id }
+      });
+
+      if (res.result.error) {
+        console.error('云函数返回错误:', res.result.error);
+      }
+
+      const users = res.result.friends || [];
+
+      dbFriends = users.map(user => ({
+        id: user.id,
+        nickName: user.nickName || '好友',
+        avatarUrl: user.avatarUrl || '/img/default-avatar.png'
+      }));
+    } catch (e) {
+      console.error('❌ 获取好友失败', e);
+    }
+
+    // 过滤掉 system 和自己
+    const filtered = dbFriends.filter(f => f.id !== 'system' && f.id !== userInfo._id);
+
+    const friends = [systemInfo, ownInfo, ...filtered];
 
     this.setData({ userInfo, friends });
   },
