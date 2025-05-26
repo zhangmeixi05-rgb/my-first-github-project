@@ -17,20 +17,59 @@ Page({
   },
 
   loadDataAndDraw() {
-    const emotions = wx.getStorageSync('emotions') || {};
+    const userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo || !userInfo._id) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+
+    wx.showLoading({ title: '加载中...' });
+
+    wx.cloud.callFunction({
+      name: 'getEmotions',
+      data: { userId: userInfo._id }
+    }).then(res => {
+      wx.hideLoading();
+      if (res.result && res.result.errorCode === 0) {
+        this.processEmotionData(res.result.data);
+      } else {
+        wx.showToast({
+          title: res.result.errorMessage || '数据加载失败',
+          icon: 'none'
+        });
+      }
+    }).catch(() => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '网络异常，请重试',
+        icon: 'none'
+      });
+    });
+  },
+
+  processEmotionData(data) {
     const { currentYear, currentMonth, emotionTypes } = this.data;
     const counts = Array(emotionTypes.length).fill(0);
 
-    for (let key in emotions) {
-      const [year, month] = key.split('-').map(num => parseInt(num));
+    // 数据库中记录的日期字段格式假设为 yyyy-mm-dd 或类似，需要根据实际调整
+    data.forEach(item => {
+      if (!item.date || !item.emotion) return;
+      // 解析日期年月
+      const dateParts = item.date.split('-');
+      if (dateParts.length < 2) return;
+      const year = parseInt(dateParts[0]);
+      const month = parseInt(dateParts[1]);
       if (year === currentYear && month === currentMonth) {
-        const emoji = emotions[key];
-        const index = emotionTypes.indexOf(emoji);
+        const index = emotionTypes.indexOf(item.emotion);
         if (index !== -1) {
           counts[index]++;
         }
       }
-    }
+    });
 
     const analysisText = this.generateAnalysis(counts);
 
@@ -42,8 +81,8 @@ Page({
 
   drawChart() {
     const ctx = wx.createCanvasContext('trendCanvas', this);
-    const { emotionCounts, emotionTypes } = this.data;
 
+    const { emotionCounts, emotionTypes } = this.data;
     const canvasWidth = 300;
     const canvasHeight = 300;
     const margin = 40;
