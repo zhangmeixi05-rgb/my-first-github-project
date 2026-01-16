@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 发布者信息和定位显示 -->
+  <view class="user-location">
+    <view class="user-info">
+      <image class="avatar" src="{{post.avatar}}" mode="aspectFill" />
+      <text class="username">{{post.nickName}}</text>
+    </view>
+  </view>
+  
+  <!-- 图片展示 -->
+  <swiper class="image-swiper" indicator-dots="true" autoplay="false" interval="5000" duration="500">
+    <block wx:for="{{post.images}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}" mode="aspectFill" class="swiper-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <!-- 标题和正文 -->
+  <view class="content">
+    <view class="title">{{post.title}}</view>
+    <view class="text">{{post.content}}</view>
+  </view>
+
+  <!-- TabBar -->
+  <view class="tabbar">
+    <view class="tab" bindtap="toggleFavorite">
+      <image src="{{isFavorited ? '/img/detail3.png' : '/img/detail1.png'}}" class="tab-icon" />
+      <text class="tab-text">{{isFavorited ? '取消收藏' : '收藏'}}</text>
+      <text class="tab-counter">{{favoriteCount}}</text>
+    </view>
+    <view class="tab" wx:if="{{source === 'my_publish'}}" data-id="{{post._id}}"  bindtap="deletePost">
+      <image src="/img/pdet.png" class="tab-icon" />
+      <text class="tab-text">删除帖子</text>
+    </view>
+    <view class="tab" wx:else bindtap="navigateToMessage">
+      <image src="/img/detail2.png" class="tab-icon" />
+      <text class="tab-text">私信</text>
+    </view>
+  </view>
+</view>

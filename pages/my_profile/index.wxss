@@ -1,0 +1,48 @@
+page {
+  /*设置底部安全距离*/
+padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+background: #E0EEEE;
+}
+
+.partOne{
+  height: 400rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: -50rpx;
+  background-color: #ffffff;
+  border: 1rpx solid rgb(176, 176, 176);
+  border-radius: 25rpx;
+}
+.partOne .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+}
+.partOne .item .itemname{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 20rpx;
+}
+
+.photo{
+  display:flex;                   
+  justify-content: center; 
+  background-color: #b0e0e6;
+  height: 300rpx;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;                
+}
+.right{
+  margin-top: 30rpx;
+}
+.btn{
+background-color:#b0e0e6 ;
+height:250rpx;
+}

@@ -1,0 +1,61 @@
+.container {
+  padding: 20rpx;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.controls {
+  display: flex;
+  gap: 20rpx;
+}
+
+button {
+  background-color: #7EC8E3;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-canvas {
+  width: 600rpx;
+  height: 600rpx;
+  margin-top: 20rpx;
+}
+
+.switch-btn {
+  margin-top: 20rpx;
+  background-color: #7EC8E3;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+.analysis-box {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background-color: #f0f8ff;
+  border-radius: 16rpx;
+}
+
+.analysis-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  white-space: pre-line;
+}

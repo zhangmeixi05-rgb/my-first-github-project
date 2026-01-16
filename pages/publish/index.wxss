@@ -1,0 +1,110 @@
+
+page {
+  /* 设置底部安全距离 */
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+}
+
+.container {
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 15px; /* 确保没有空隙 */
+  background-color:#FDF5E6;
+}
+
+.form {
+  padding: 0 20px; /* 只在左右添加填充，去掉顶部和底部填充 */
+}
+
+.form-item, .form-item-row {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-item-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-width {
+  width: 48%;
+}
+
+.label {
+  font-size: 18px;
+  margin-right: 10px;
+  color: #8B6969;
+}
+
+.input-title, .input-content {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.input-content {
+  height: 100px;
+}
+
+.picker, .location {
+  padding: 10px;
+  background-color: #FFF5EE;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.location-btn, .upload-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #FFE4E1;
+  color: #8B6969;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.location-btn:hover, .upload-btn:hover {
+  background-color: #FFE4E1;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.publish-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #FFC1C1;
+  color: #8B6969;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.publish-btn:hover {
+  background-color: #FFC1C1;
+}

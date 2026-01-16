@@ -1,0 +1,31 @@
+page {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFECF5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 20rpx;
+}
+
+.card {
+  width: 80%;
+  background-color: #fff7fa;
+  margin: 20rpx 0;
+  padding: 40rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 10rpx 20rpx rgba(255, 192, 203, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 32rpx;
+  color: #ff69b4;
+}
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+}

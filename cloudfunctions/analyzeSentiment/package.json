@@ -1,0 +1,12 @@
+{
+  "name": "analyzesentiment",
+  "version": "1.0.0",
+  "description": "Tencent Cloud NLP sentiment analysis function",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "tencentcloud-sdk-nodejs": "^4.1.17",
+    "wx-server-sdk": "^3.0.1"
+  },
+  "license": "MIT"
+}
