@@ -7,32 +7,8 @@
     </view>
   </view>
 
-  <!-- 图表类型切换 -->
-  <view class="chart-type-switch">
-    <button
-      class="chart-btn {{chartType === 'bar' ? 'active' : ''}}"
-      data-type="bar"
-      bindtap="switchChartType"
-    >
-      柱状图
-    </button>
-    <button
-      class="chart-btn {{chartType === 'pie' ? 'active' : ''}}"
-      data-type="pie"
-      bindtap="switchChartType"
-    >
-      饼状图
-    </button>
-  </view>
+  <canvas canvas-id="trendCanvas" class="chart-canvas"></canvas>
 
-  <!-- 图表画布 -->
-  <canvas
-    canvas-id="trendCanvas"
-    class="chart-canvas"
-    style="width: 350px; height: 450px;"
-  ></canvas>
-
-  <!-- 情绪分析文本 -->
   <view class="analysis-box">
     <text class="analysis-text">{{analysisText}}</text>
   </view>

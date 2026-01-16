@@ -16,7 +16,7 @@
       "functionRoot": "cloudfunctions/"
     }
   ],
-  "libVersion": "2.31.1",
+  "libVersion": "3.3.4",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -46,6 +46,5 @@
     "wxext14566970e7e9f62": "3.0.2-8"
   },
   "projectArchitecture": "multiPlatform",
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
-  "projectname": "%E5%B0%8F%E6%83%85%E7%BB%AA%E4%BA%8B%E5%8A%A1%E6%89%80"
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }
