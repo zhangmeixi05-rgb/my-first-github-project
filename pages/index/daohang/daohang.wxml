@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="card" bindtap="goToTrack">
+    <image src="/pages/images/track_icon.jpg" class="icon"/>
+    <text>每日情绪打卡</text>
+  </view>
+  <view class="card" bindtap="goToTrend">
+    <image src="/pages/images/trend_icon.jpg" class="icon"/>
+    <text>情绪趋势图</text>
+  </view>
+</view>

@@ -1,0 +1,108 @@
+page {
+  /*设置底部安全距离*/
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFF0F5;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.messages {
+  overflow-y: scroll;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.message-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 5px; /* 调整 message-item 左边距 */
+  margin-right: 5px; /* 调整 message-item 右边距 */
+}
+
+.message-item.self {
+  justify-content: flex-end; /* 调整自己发送的消息居右显示 */
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.right .avatar {
+  margin-left: auto; /* 调整自己发送的消息头像在对话框右侧 */
+}
+
+.left .avatar {
+  margin-right: auto; /* 调整接收消息的头像在对话框左侧 */
+}
+
+.message-text {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  max-width: 55%; /* 调整 message-text 的最大宽度 */
+  word-wrap: break-word;
+}
+
+.message-item.self .message-text {
+  background-color: #EEAEEE;
+}
+
+.message-image {
+  max-width: 55%; /* 调整 message-image 的最大宽度 */
+  max-height: 200px; /* 调整 message-image 的最大高度 */
+  border-radius: 4px;
+}
+
+.message-item.self .message-image {
+  margin-left: 10px;
+}
+
+.tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  padding-bottom: calc(constant(safe-area-inset-bottom));
+  padding-bottom: calc(env(safe-area-inset-bottom));
+}
+
+.tab-input {
+  flex: 8; /* input 占满剩余宽度 */
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.send-image {
+  width: 36px; /* 调整 send-image 的宽度 */
+  height: 36px;
+  margin-left: 5px; /* 调整 send-image 的左边距 */
+  margin-right: 5px;/* 调整 send-image 的右边距 */
+}
+
+.send-button {
+  flex:2; /* 调整 send-button 的宽度 */
+  background-color: #CD96CD;
+}
+
+.tab-image,
+.tab-button {
+  cursor: pointer; /* 添加鼠标指针 */
+}

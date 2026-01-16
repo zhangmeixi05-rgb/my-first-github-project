@@ -1,0 +1,69 @@
+page {
+  /* 设置底部安全距离 */
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+  background: #FFF0F5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friend-request-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+  width: 100%;
+}
+
+.avatar-container {
+  width: 200rpx;
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+
+.nickname-container {
+  margin-top: 10rpx;
+}
+
+.nickname {
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.reason-container {
+  margin-top: 10rpx;
+  width: 100%;
+}
+
+.reason {
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+  width: 100%;
+}
+
+.action-button {
+  width: 200rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+  margin: 0 10rpx;
+}

@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header">
+    <text class="title">{{currentYear}}年{{currentMonth}}月 情绪统计</text>
+    <view class="controls">
+      <button bindtap="prevMonth">上个月</button>
+      <button bindtap="nextMonth">下个月</button>
+    </view>
+  </view>
+
+  <view class="chart-type-switch">
+    <button bindtap="switchChartType" class="chart-btn {{chartType === 'bar' ? 'active' : ''}}">柱状图</button>
+    <button bindtap="switchChartType" class="chart-btn {{chartType === 'pie' ? 'active' : ''}}">饼状图</button>
+  </view>
+
+  <view class="empty-state" wx:if="{{totalEmotions === 0}}">
+    <text class="empty-text">当月暂无情绪记录</text>
+  </view>
+  <canvas canvas-id="trendCanvas" class="chart-canvas" wx:if="{{totalEmotions > 0}}"></canvas>
+
+  <view class="legend" wx:if="{{chartType === 'pie' && totalEmotions > 0}}">
+    <view class="legend-item" wx:for="{{emotionTypes}}" wx:key="index">
+      <view class="legend-color" style="background-color: {{legendColors[index]}}"></view>
+      <text class="legend-label">{{emotionLabels[index]}}</text>
+    </view>
+  </view>
+
+  <view class="analysis-box">
+    <text class="analysis-text">{{analysisText}}</text>
+  </view>
+</view>

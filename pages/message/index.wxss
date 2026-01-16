@@ -1,0 +1,36 @@
+page {
+  /*设置底部安全距离*/
+padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+background: #FFF0F5;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+   margin-top: 20px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: scroll;
+  margin-top:-80px;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.nickname {
+  font-size: 16px;
+}

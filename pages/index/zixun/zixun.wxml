@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 网络状态提示 -->
+  <view wx:if="{{apiError}}" class="api-error">
+    <text>⚠️ 网络连接不稳定，正在尝试重连...</text>
+  </view>
+
+  <!-- 聊天区域 -->
+  <scroll-view 
+    scroll-y 
+    scroll-with-animation 
+    scroll-top="{{scrollTop}}" 
+    class="chat-area"
+    id="chatArea"
+  >
+    <block wx:for="{{messages}}" wx:key="id">
+      <view class="message-item {{item.role}}">
+        <!-- 头像 -->
+        <image 
+          class="avatar" 
+          src="{{item.role === 'user' ? (userAvatar || '/pages/images/moren.png') : '/pages/images/logo.png'}}"
+          mode="aspectFill"
+        />
+
+        <!-- 消息内容区域 -->
+        <view class="message-content">
+          <!-- 正在分析 -->
+          <view wx:if="{{item.isThinking}}" class="message-text thinking-message">
+            <text>正在分析中</text><text class="thinking-dots">...</text>
+          </view>
+
+          <!-- 分析结果 -->
+          <view wx:elif="{{item.isAnalysisResult}}" class="analysis-result">
+            {{item.content}}
+          </view>
+
+          <!-- 普通消息 -->
+          <view wx:else class="message-text">
+            {{item.content}}
+          </view>
+
+          <view class="message-time">{{item.time}}</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 输入框 -->
+  <view class="input-area">
+    <input 
+      type="text" 
+      placeholder="请输入您的情感问题..." 
+      bindinput="onInput" 
+      value="{{inputValue}}"
+      bindconfirm="sendMessage"
+      confirm-type="send"
+      class="input-box"
+      disabled="{{apiError}}"
+    />
+    <button 
+      bindtap="sendMessage" 
+      class="send-btn" 
+      disabled="{{isSending || apiError}}"
+    >
+      {{isSending ? '分析中...' : '发送'}}
+    </button>
+  </view>
+</view>
