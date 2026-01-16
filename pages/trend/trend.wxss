@@ -27,12 +27,35 @@ button {
   border-radius: 10rpx;
 }
 
-.chart-canvas {
-  width: 100%;
-  height: 400rpx;
-  margin-top: 20rpx;
+/* 图表类型切换 */
+.chart-type-switch {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
 }
 
+.chart-btn {
+  background-color: #7EC8E3;
+  color: white;
+  padding: 15rpx 30rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.chart-btn.active {
+  background-color: #5BA3C0;
+}
+
+/* 图表画布 */
+.chart-canvas {
+  width: 350px;
+  height: 450px;
+  margin: 20rpx auto;
+  display: block;
+}
+
+/* 情绪分析区域 */
 .analysis-box {
   margin-top: 20rpx;
   padding: 20rpx;
