@@ -17,6 +17,10 @@
     "pages/detail/detail",
     "pages/chat/chat",
     "pages/newfriends/index",
+<<<<<<< HEAD
+    "pages/friend_history/index",
+=======
+>>>>>>> origin/main
     "pages/track/track",
     "pages/trend/trend"
   ],

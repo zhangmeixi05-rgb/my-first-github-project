@@ -12,7 +12,14 @@
   </block>
 
   <view class="new-friends" style="position: relative; left: -216rpx; top: -225rpx">
+<<<<<<< HEAD
+    <view style="display: flex; justify-content: space-between; align-items: center; position: relative; left: 0rpx; top: 75rpx">
+      <text style="font-size: 36rpx; font-weight: bold; border-bottom: 4rpx solid #5F9EA0; color: #53868B;">新的朋友</text>
+      <text bindtap="navigateToFriendHistory" style="font-size: 28rpx; color: #53868B;">查看历史</text>
+    </view>
+=======
     <text style="font-size: 36rpx; font-weight: bold; border-bottom: 4rpx solid #5F9EA0; color: #53868B; position: relative; left: 0rpx; top: 75rpx">新的朋友</text>
+>>>>>>> origin/main
     <block wx:for="{{newFriendRequests}}" wx:key="userId">
       <view class="new-friend-item" bindtap="navigateToNewFriends" data-id="{{item.userId}}">
         <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" style="width: 97rpx; height: 95rpx; display: inline-block; box-sizing: border-box; position: relative; left: 131rpx; top: 126rpx"></image>

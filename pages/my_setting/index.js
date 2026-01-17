@@ -4,7 +4,12 @@ Page({
     searchResult: null,
     userInfo: {},
     friends: [],
+<<<<<<< HEAD
+    newFriendRequests: [],
+    isLoading: false
+=======
     newFriendRequests: []
+>>>>>>> origin/main
   },
 
   onLoad() {
@@ -16,6 +21,20 @@ Page({
     this.loadFriendRequests();
   },
 
+<<<<<<< HEAD
+  onShow() {
+    if (!this.data.isLoading) {
+      this.setData({ isLoading: true });
+      this.loadFriendsFromCloud();
+      this.loadFriendRequests();
+      setTimeout(() => {
+        this.setData({ isLoading: false });
+      }, 500);
+    }
+  },
+
+=======
+>>>>>>> origin/main
   loadFriends() {
     const systemInfo = { id: 'system', avatarUrl: '/img/xtxx.jpg', nickName: '系统消息' };
     const userInfo = this.data.userInfo;
@@ -34,6 +53,17 @@ Page({
     const userId = this.data.userInfo._id;
     if (!userId) return;
   
+<<<<<<< HEAD
+    const db = wx.cloud.database();
+    db.collection('fellow').where({ friendId: userId }).get().then(res => {
+      const pendingRequests = (res.data || []).filter(req => req.isAgree === false || !req.isAgree);
+      this.setData({
+        newFriendRequests: pendingRequests
+      });
+    }).catch(err => {
+      console.error('获取好友请求失败', err);
+      wx.showToast({ title: '加载好友请求失败', icon: 'none' });
+=======
     wx.cloud.callFunction({
       name: 'friend-request',
       data: { userId: userId },
@@ -50,6 +80,7 @@ Page({
         console.error('获取好友请求失败', err);
         wx.showToast({ title: '加载好友请求失败', icon: 'none' });
       }
+>>>>>>> origin/main
     });
   },
   
@@ -194,5 +225,14 @@ Page({
     wx.navigateTo({
       url: '/pages/newfriends/index'
     });
+<<<<<<< HEAD
+  },
+
+  navigateToFriendHistory() {
+    wx.navigateTo({
+      url: '/pages/friend_history/index'
+    });
+=======
+>>>>>>> origin/main
   }
 });

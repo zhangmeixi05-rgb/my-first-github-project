@@ -7,6 +7,9 @@
     </view>
   </view>
 
+<<<<<<< HEAD
+  <canvas canvas-id="trendCanvas" class="chart-canvas"></canvas>
+=======
 
 
   <view class="chart-type-switch">
@@ -60,6 +63,7 @@
   ></canvas>
 
   <!-- 情绪分析文本 -->
+>>>>>>> origin/main
 
   <view class="analysis-box">
     <text class="analysis-text">{{analysisText}}</text>

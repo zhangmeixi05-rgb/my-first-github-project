@@ -2,6 +2,12 @@ Page({
   data: {
     currentYear: 0,
     currentMonth: 0,
+<<<<<<< HEAD
+    emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
+    emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
+    emotionCounts: [0, 0, 0, 0, 0],
+    analysisText: ''
+=======
 
     emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
     emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
@@ -29,6 +35,7 @@ Page({
     emotionColors: ['#FFD700', '#6495ED', '#FF6347', '#9370DB', '#98FB98'],
     hasData: false
 
+>>>>>>> origin/main
   },
 
   onLoad() {
@@ -78,7 +85,10 @@ Page({
     const { currentYear, currentMonth, emotionTypes } = this.data;
     const counts = Array(emotionTypes.length).fill(0);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
     // 数据库中记录的日期字段格式假设为 yyyy-mm-dd 或类似，需要根据实际调整
     data.forEach(item => {
       if (!item.date || !item.emotion) return;
@@ -87,6 +97,8 @@ Page({
       if (dateParts.length < 2) return;
       const year = parseInt(dateParts[0]);
       const month = parseInt(dateParts[1]);
+<<<<<<< HEAD
+=======
 
     data.forEach(item => {
       if (!item.date || !item.emotion) return;
@@ -98,6 +110,7 @@ Page({
       const month = parseInt(dateParts[1]);
 
 
+>>>>>>> origin/main
       if (year === currentYear && month === currentMonth) {
         const index = emotionTypes.indexOf(item.emotion);
         if (index !== -1) {
@@ -106,6 +119,8 @@ Page({
       }
     });
 
+<<<<<<< HEAD
+=======
 
 
     const totalEmotions = counts.reduce((a, b) => a + b, 0);
@@ -114,10 +129,14 @@ Page({
     const total = counts.reduce((a, b) => a + b, 0);
     const hasData = total > 0;
 
+>>>>>>> origin/main
     const analysisText = this.generateAnalysis(counts);
 
     this.setData({
       emotionCounts: counts,
+<<<<<<< HEAD
+      analysisText
+=======
 
       analysisText
 
@@ -127,10 +146,22 @@ Page({
 
       hasData
 
+>>>>>>> origin/main
     }, this.drawChart);
   },
 
   drawChart() {
+<<<<<<< HEAD
+    const ctx = wx.createCanvasContext('trendCanvas', this);
+
+    const { emotionCounts, emotionTypes } = this.data;
+    const canvasWidth = 300;
+    const canvasHeight = 300;
+    const margin = 40;
+    const barWidth = 30;
+    const gap = 20;
+    const maxCount = Math.max(...emotionCounts, 1);
+=======
 
 
     if (this.data.chartType === 'pie') {
@@ -244,10 +275,15 @@ Page({
     const maxCount = Math.max(...emotionCounts, 1);
     const chartHeight = canvasHeight - margin.top - margin.bottom;
     const chartWidth = canvasWidth - margin.left - margin.right;
+>>>>>>> origin/main
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     for (let i = 0; i < emotionCounts.length; i++) {
+<<<<<<< HEAD
+      const x = margin + i * (barWidth + gap);
+      const barHeight = (emotionCounts[i] / maxCount) * (canvasHeight - 2 * margin);
+=======
       const x =
         margin.left +
         i * (barWidth + gap) +
@@ -285,6 +321,7 @@ Page({
     for (let i = 0; i < emotionCounts.length; i++) {
       const x = margin + i * (barWidth + gap);
       const barHeight = (emotionCounts[i] / maxCount) * (canvasHeight - 2 * margin - 30);
+>>>>>>> origin/main
       const y = canvasHeight - margin - barHeight;
 
       ctx.setFillStyle('#7EC8E3');
@@ -294,6 +331,11 @@ Page({
       ctx.setFontSize(14);
       ctx.fillText(emotionCounts[i], x + 5, y - 5);
 
+<<<<<<< HEAD
+      // 显示 emoji 表情
+      ctx.setFontSize(20);
+      ctx.fillText(emotionTypes[i], x + 5, canvasHeight - 10);
+=======
       ctx.setFontSize(16);
       ctx.fillText(emotionTypes[i], x + 8, canvasHeight - margin + 5);
 
@@ -414,11 +456,14 @@ Page({
       ctx.setTextAlign('left');
       ctx.setTextBaseline('middle');
       ctx.fillText(`${emotionTypes[i]} ${emotionLabels[i]}`, legendX - 18, legendY);
+>>>>>>> origin/main
     }
 
     ctx.draw();
   },
 
+<<<<<<< HEAD
+=======
   switchChartType(e) {
     const newChartType = e.currentTarget.dataset.type;
     this.setData({
@@ -427,17 +472,23 @@ Page({
 
   },
 
+>>>>>>> origin/main
   generateAnalysis(counts) {
     const { emotionTypes, emotionLabels } = this.data;
     const total = counts.reduce((a, b) => a + b, 0);
     if (total === 0) return '本月尚未记录任何情绪。';
 
     const maxCount = Math.max(...counts);
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
     const maxIndexes = counts.map((c, i) => c === maxCount ? i : -1).filter(i => i !== -1);
     const dominantEmotions = maxIndexes.map(i => `${emotionTypes[i]}（${emotionLabels[i]}）`).join('、');
 
     // 简单分析逻辑
+<<<<<<< HEAD
+=======
 
     const maxIndexes = counts
       .map((c, i) => (c === maxCount ? i : -1))
@@ -448,6 +499,7 @@ Page({
       .join('、');
 
 
+>>>>>>> origin/main
     const positiveIndex = emotionTypes.indexOf('😊');
     const negativeIndex = emotionTypes.indexOf('😞');
 
@@ -486,6 +538,8 @@ Page({
       currentMonth++;
     }
     this.setData({ currentYear, currentMonth }, this.loadDataAndDraw);
+<<<<<<< HEAD
+=======
 
   },
 
@@ -555,5 +609,6 @@ Page({
     }).exec();
 
 
+>>>>>>> origin/main
   }
 });

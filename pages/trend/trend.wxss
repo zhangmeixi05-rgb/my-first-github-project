@@ -27,6 +27,14 @@ button {
   border-radius: 10rpx;
 }
 
+<<<<<<< HEAD
+.chart-canvas {
+  width: 100%;
+  height: 400rpx;
+  margin-top: 20rpx;
+}
+
+=======
 
 .chart-container {
   display: flex;
@@ -104,6 +112,7 @@ button {
 
 /* 情绪分析区域 */
 
+>>>>>>> origin/main
 .analysis-box {
   margin-top: 20rpx;
   padding: 20rpx;
@@ -116,6 +125,8 @@ button {
   line-height: 1.6;
   white-space: pre-line;
 }
+<<<<<<< HEAD
+=======
 
 /* 空状态 */
 .empty-state {
@@ -132,3 +143,4 @@ button {
   font-size: 32rpx;
   color: #999;
 }
+>>>>>>> origin/main

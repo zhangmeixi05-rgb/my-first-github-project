@@ -1,7 +1,14 @@
 <view class="container">
   <view class="messages">
     <block wx:for="{{messages}}" wx:key="time">
+<<<<<<< HEAD
+      <view class="system-message" wx:if="{{item.type === 'system'}}">
+        <text class="system-text">{{item.content}}</text>
+      </view>
+      <view class="message-item self" wx:elif="{{item.from === userInfo.nickName}}">
+=======
       <view class="message-item self" wx:if="{{item.from === userInfo.nickName}}">
+>>>>>>> origin/main
         <block wx:if="{{item.type === 'text'}}">
           <text class="message-text right">{{item.content}}</text>
         </block>
@@ -22,7 +29,10 @@
     </block>
   </view>
 
+<<<<<<< HEAD
+=======
   <!-- TabBar -->
+>>>>>>> origin/main
   <view class="tabbar">
     <input type="text" placeholder="请输入消息" value="{{inputContent}}" bindinput="onInput" class="tab-input" />
     <image src="/img/chatp.jpg" mode="aspectFill" class="send-image tab-image" bindtap="chooseImage" />

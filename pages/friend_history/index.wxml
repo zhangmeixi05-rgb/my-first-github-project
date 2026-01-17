@@ -1,0 +1,78 @@
+<view class="container">
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      <text>我发出的</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      <text>我收到的</text>
+    </view>
+  </view>
+
+  <view class="content">
+    <block wx:if="{{currentTab === 0}}">
+      <block wx:if="{{sentRequests.length > 0}}">
+        <view class="request-list">
+          <view class="request-item" wx:for="{{sentRequests}}" wx:key="_id">
+            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            <view class="info">
+              <view class="header">
+                <text class="nickname">{{item.nickName}}</text>
+                <text class="status" style="color: {{item.status === 'pending' ? '#FFA500' : item.status === 'accepted' ? '#32CD32' : '#FF6347'}}">
+                  {{item.status === 'pending' ? '待处理' : item.status === 'accepted' ? '已接受' : '已拒绝'}}
+                </text>
+              </view>
+              <view class="reason">
+                <text class="label">验证消息：</text>
+                <text>{{item.reason}}</text>
+              </view>
+              <view class="time">
+                <text>{{item.createTime}}</text>
+              </view>
+            </view>
+            <view class="actions" wx:if="{{item.status === 'rejected'}}">
+              <button class="action-btn" bindtap="resendRequest" data-request="{{item}}">重新申请</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="empty">
+          <text>暂无发出的申请</text>
+        </view>
+      </block>
+    </block>
+
+    <block wx:if="{{currentTab === 1}}">
+      <block wx:if="{{receivedRequests.length > 0}}">
+        <view class="request-list">
+          <view class="request-item" wx:for="{{receivedRequests}}" wx:key="_id">
+            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            <view class="info">
+              <view class="header">
+                <text class="nickname">{{item.nickName}}</text>
+                <text class="status" style="color: {{item.status === 'pending' ? '#FFA500' : item.status === 'accepted' ? '#32CD32' : '#FF6347'}}">
+                  {{item.status === 'pending' ? '待处理' : item.status === 'accepted' ? '已接受' : '已拒绝'}}
+                </text>
+              </view>
+              <view class="reason">
+                <text class="label">验证消息：</text>
+                <text>{{item.reason}}</text>
+              </view>
+              <view class="time">
+                <text>{{item.createTime}}</text>
+              </view>
+            </view>
+            <view class="actions" wx:if="{{item.status === 'rejected'}}">
+              <button class="action-btn" bindtap="resendRequest" data-request="{{item}}">重新申请</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="empty">
+          <text>暂无收到的申请</text>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>

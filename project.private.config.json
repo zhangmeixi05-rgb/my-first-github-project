@@ -3,7 +3,11 @@
 <<<<<<< HEAD
   "projectname": "%E5%B0%8F%E6%83%85%E7%BB%AA%E4%BA%8B%E5%8A%A1%E6%89%80",
 =======
+<<<<<<< HEAD
+  "projectname": "%E5%B0%8F%E6%83%85%E7%BB%AA%E4%BA%8B%E5%8A%A1%E6%89%80",
+=======
   "projectname": "小情绪事务所",
+>>>>>>> origin/main
 >>>>>>> origin/main
   "setting": {
     "compileHotReLoad": true,

@@ -1,4 +1,75 @@
 <view class="container">
+<<<<<<< HEAD
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      <text>待处理</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      <text>已拒绝</text>
+    </view>
+  </view>
+
+  <view class="content">
+    <block wx:if="{{currentTab === 0}}">
+      <block wx:if="{{newFriendRequests.length > 0}}">
+        <view class="request-list">
+          <view class="friend-request-item" wx:for="{{newFriendRequests}}" wx:key="_id">
+            <view class="avatar-container">
+              <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <view class="nickname-container">
+              <text class="nickname">{{item.nickName}}</text>
+            </view>
+            <view class="reason-container">
+              <view class="form-item" style="color:#666;text-align: center;font-size: 28rpx">
+                验证消息：
+                <text class="reason">{{item.reason}}</text>
+              </view>
+            </view>
+            <view class="button-container">
+              <button bindtap="acceptRequest" data-request="{{item}}" class="action-button" style="background-color:#DDA0DD ;color:white">接受</button>
+              <button bindtap="rejectRequest" data-request="{{item}}" class="action-button" style="background-color:#B0C4DE ;color:white">拒绝</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="empty">
+          <text>暂无待处理的好友申请</text>
+        </view>
+      </block>
+    </block>
+
+    <block wx:if="{{currentTab === 1}}">
+      <block wx:if="{{rejectedRequests.length > 0}}">
+        <view class="request-list">
+          <view class="friend-request-item" wx:for="{{rejectedRequests}}" wx:key="_id">
+            <view class="avatar-container">
+              <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <view class="nickname-container">
+              <text class="nickname">{{item.nickName}}</text>
+            </view>
+            <view class="reason-container">
+              <view class="form-item" style="color:#666;text-align: center;font-size: 28rpx">
+                验证消息：
+                <text class="reason">{{item.reason}}</text>
+              </view>
+            </view>
+            <view class="button-container">
+              <button bindtap="reacceptRequest" data-request="{{item}}" class="action-button" style="background-color:#DDA0DD ;color:white">重新接受</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="empty">
+          <text>暂无已拒绝的好友申请</text>
+        </view>
+      </block>
+    </block>
+  </view>
+=======
   <block wx:for="{{newFriendRequests}}" wx:key="userId">
     <view class="friend-request-item">
       <view class="avatar-container">
@@ -19,4 +90,5 @@
       </view>
     </view>
   </block>
+>>>>>>> origin/main
 </view>
