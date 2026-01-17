@@ -5,6 +5,14 @@ Page({
 
     emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
     emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
+    emotionColors: ['#FFB6C1', '#B0C4DE', '#FFA500', '#98FB98', '#DDA0DD'],
+    emotionCounts: [0, 0, 0, 0, 0],
+    analysisText: '',
+    chartType: 'bar'
+
+
+    emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
+    emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
     emotionCounts: [0, 0, 0, 0, 0],
     analysisText: '',
     chartType: 'bar', // 'bar' | 'pie'
@@ -99,7 +107,9 @@ Page({
     });
 
 
+
     const totalEmotions = counts.reduce((a, b) => a + b, 0);
+
 
     const total = counts.reduce((a, b) => a + b, 0);
     const hasData = total > 0;
@@ -108,6 +118,9 @@ Page({
 
     this.setData({
       emotionCounts: counts,
+
+      analysisText
+
       analysisText,
 
       totalEmotions
@@ -118,6 +131,7 @@ Page({
   },
 
   drawChart() {
+
 
     if (this.data.chartType === 'pie') {
       this.drawPieChart();
@@ -166,14 +180,36 @@ Page({
       ctx.draw();
     }).exec();
 
+    const ctx = wx.createCanvasContext('trendCanvas', this);
+    const { emotionCounts, emotionTypes, emotionLabels, emotionColors, chartType } = this.data;
+    const canvasWidth = 300;
+    const canvasHeight = 300;
+    const margin = 40;
+
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const total = emotionCounts.reduce((a, b) => a + b, 0);
+    if (total === 0) {
+      ctx.setFillStyle('#000000');
+      ctx.setFontSize(16);
+      ctx.fillText('本月暂无情绪记录', canvasWidth / 2 - 70, canvasHeight / 2);
+      ctx.draw();
+
+
     const { hasData, chartType } = this.data;
 
     if (!hasData) {
       this.drawEmptyState();
+
       return;
     }
 
     if (chartType === 'bar') {
+
+      this.drawBarChart(ctx, canvasWidth, canvasHeight, margin);
+    } else {
+      this.drawPieChart(ctx, canvasWidth, canvasHeight);
+
       this.drawBarChart();
     } else {
       this.drawPieChart();
@@ -233,10 +269,85 @@ Page({
 
       ctx.setFontSize(14);
       ctx.fillText(emotionLabels[i], x + barWidth / 2, canvasHeight - margin.bottom + 55);
+
     }
 
     ctx.draw();
   },
+
+
+  drawBarChart(ctx, canvasWidth, canvasHeight, margin) {
+    const { emotionCounts, emotionTypes, emotionLabels } = this.data;
+    const barWidth = 30;
+    const gap = 20;
+    const maxCount = Math.max(...emotionCounts, 1);
+
+    for (let i = 0; i < emotionCounts.length; i++) {
+      const x = margin + i * (barWidth + gap);
+      const barHeight = (emotionCounts[i] / maxCount) * (canvasHeight - 2 * margin - 30);
+      const y = canvasHeight - margin - barHeight;
+
+      ctx.setFillStyle('#7EC8E3');
+      ctx.fillRect(x, y, barWidth, barHeight);
+
+      ctx.setFillStyle('#000000');
+      ctx.setFontSize(14);
+      ctx.fillText(emotionCounts[i], x + 5, y - 5);
+
+      ctx.setFontSize(16);
+      ctx.fillText(emotionTypes[i], x + 8, canvasHeight - margin + 5);
+
+      ctx.setFontSize(12);
+      ctx.fillText(emotionLabels[i], x + 5, canvasHeight - margin + 25);
+    }
+  },
+
+  drawPieChart(ctx, canvasWidth, canvasHeight) {
+    const { emotionCounts, emotionColors, emotionLabels } = this.data;
+    const centerX = canvasWidth / 2;
+    const centerY = canvasHeight / 2;
+    const radius = Math.min(canvasWidth, canvasHeight) / 2 - 40;
+
+    const total = emotionCounts.reduce((a, b) => a + b, 0);
+    let currentAngle = -Math.PI / 2;
+
+    for (let i = 0; i < emotionCounts.length; i++) {
+      const angle = (emotionCounts[i] / total) * 2 * Math.PI;
+      const endAngle = currentAngle + angle;
+
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(centerX, centerY, radius, currentAngle, endAngle);
+      ctx.closePath();
+      ctx.setFillStyle(emotionColors[i]);
+      ctx.fill();
+
+      const labelAngle = currentAngle + angle / 2;
+      const labelX = centerX + Math.cos(labelAngle) * (radius / 2);
+      const labelY = centerY + Math.sin(labelAngle) * (radius / 2);
+
+      const percentage = ((emotionCounts[i] / total) * 100).toFixed(1);
+      ctx.setFillStyle('#000000');
+      ctx.setFontSize(12);
+      ctx.fillText(`${percentage}%`, labelX - 15, labelY);
+
+      currentAngle = endAngle;
+    }
+
+    const legendY = canvasHeight - 20;
+    for (let i = 0; i < emotionLabels.length; i++) {
+      const legendX = 40 + i * 50;
+      ctx.setFillStyle(emotionColors[i]);
+      ctx.fillRect(legendX, legendY - 10, 15, 15);
+      ctx.setFillStyle('#000000');
+      ctx.setFontSize(12);
+      ctx.fillText(emotionLabels[i], legendX + 20, legendY - 2);
+    }
+  },
+
+  switchChartType() {
+    const chartType = this.data.chartType === 'bar' ? 'pie' : 'bar';
+    this.setData({ chartType }, this.drawChart);
 
   drawPieChart() {
     const ctx = wx.createCanvasContext('trendCanvas', this);
