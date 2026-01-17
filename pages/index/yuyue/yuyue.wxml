@@ -1,0 +1,42 @@
+<view class="box">
+
+<text style="font-weight:600;font-size:40rpx;padding:20px 15px 15px 15px;">预约选择</text>
+<image class="img1" mode="widthFix" src="/pages/images/img.jpg"></image>
+<view class="divLine"></view>
+
+<view class="container">
+  <view class="form-item">
+    <text class="form-label">姓名</text>
+    <input type="text" placeholder="请输入姓名" bindinput="onNameInput" value="{{name}}" />
+  </view>
+  <view class="form-item">
+    <text class="form-label">学号</text>
+    <input type="text" placeholder="请输入学号" bindinput="onIdInput" value="{{studentId}}" />
+  </view>
+  <view class="form-item">
+    <text class="form-label">选择时间</text>
+    <picker mode="time" bindchange="onTimeChange">
+      <view class="picker">
+        {{time || '请选择时间'}}
+      </view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <text class="form-label">选择日期</text>
+    <picker mode="date" bindchange="onDateChange">
+      <view class="picker">
+        {{date || '请选择日期'}}
+      </view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <text class="form-label">选择位置</text>
+    <button bindtap="chooseLocation">选择位置</button>
+    <text>{{location.name || '未选择位置'}}</text>
+  </view>
+<button bindtap="submitForm" class="custom-button">提交</button>
+</view>
+</view>
+
+
+

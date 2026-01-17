@@ -1,0 +1,32 @@
+page {
+  /*设置底部安全距离*/
+padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+background: #cd000021;
+}
+.container {
+  padding: 20rpx;
+}
+.columns {
+  width: 96%;
+}
+.left-column, .right-column {
+  margin-top: 20px;
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.post {
+  margin-bottom: 20rpx;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.post image {
+  width: 100%;
+  height: 400rpx;
+}
+.post text {
+  display: block;
+  padding: 10rpx;
+}

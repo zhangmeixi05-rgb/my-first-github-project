@@ -1,0 +1,10 @@
+<view class="container" style="color: #483D8B; border-radius: 8px; width: 648rpx; height: 962rpx; justify-content: space-between; box-sizing: border-box; margin-left: 25px; border: 3px solid #D8BFD8; display: flex">
+  <view class="messages" style="width: 612rpx; box-sizing: border-box; display: block; height: 100rpx">
+    <block wx:for="{{friends}}" wx:key="id">
+      <view class="friend-item" bindtap="handleMessageTap" data-friend-id="{{item.id}}" data-nick-name="{{item.nickName}}">
+        <image class="avatar" src="{{item.avatarUrl}}" />
+        <text class="nickname">{{item.nickName}}</text>
+      </view>
+    </block>
+  </view>
+</view>

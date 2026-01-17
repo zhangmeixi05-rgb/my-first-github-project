@@ -1,0 +1,62 @@
+<view class="head">
+  <view class="title">
+    <swiper indicator-dots='true' autoplay='true' interval='4000' duration='1000' circular='true' class="swip">
+      <block wx:for="{{Imgs}}" wx:for-index="index">
+        <swiper-item>
+          <image src='{{Imgs[index].url}}' mode='widthFix'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+<view class="zijian">
+  <view class="title2">"小情绪事务所"</view>
+</view>
+
+<view class="function">
+  <view class="release">
+    <view class="list">
+      <view bindtap="diancan">
+        <image src="/pages/images/didian.jpg" class="image3" style="width: 150rpx; height: 150rpx; display: inline-block; box-sizing: border-box"></image>
+      </view>
+      <navigator url="/pages/index/zixun/zixun">
+      <view class="button" >
+        咨询
+      </view>
+      </navigator>
+    </view>
+    <view class="font" style="color: #CDBE70; font-weight: 500">
+      情感分析
+    </view>
+  </view>
+
+  <view class="release">
+    <view class="list">
+      <view bindtap="ontap">
+        <image src="/pages/images/didian.jpg" class="image3" style="width: 150rpx; height: 150rpx; display: inline-block; box-sizing: border-box"></image>
+      </view>
+      <navigator url="/pages/index/daohang/daohang">
+        <view class="button">
+          日记
+        </view>
+      </navigator>
+    </view>
+    <view class="font" style="color: #CDBE70; font-weight: 500">
+      心情地图
+    </view>
+  </view>
+</view>
+
+
+
+<view class="announcement" style="color: #CDBE70; font-weight: 700">情绪小贴士：
+  <view class="list2">
+    <view class="li" bindtap="1" style="color: #CDBE70">允许自己不开心，也是一种成长。</view>
+    <view class="divLine"></view>
+    <view class="li" bindtap="2" style="color: #CDBE70">感受情绪，而不是压抑它。</view>
+    <view class="divLine"></view>
+    <view class="li" bindtap="3" style="color: #CDBE70">小确幸，是情绪的维他命。</view>
+    <view class="divLine"></view>
+  </view>
+</view>

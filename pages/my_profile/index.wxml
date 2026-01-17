@@ -1,0 +1,36 @@
+<view class="photo">
+  <button bindtap="chooseImage" class="btn"><image class="avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image></button>
+</view>
+
+<view class="partOne">
+  <!--昵称-->
+  <view class="item">
+    <view class="itemname">
+      <text>昵称: </text><input type="text" placeholder="请输入昵称" value="{{userInfo.nickName}}" bindinput="onNickNameInput"/>
+    </view>
+  </view>
+       
+  <!--手机号-->
+  <view class="item">
+    <view class="itemname">
+      <text>手机号: </text><input type="text" placeholder="请输入手机号" value="{{userInfo.phoneNumber}}" bindinput="onPhoneNumberInput"/>
+    </view>  
+  </view>
+
+  <!--学号-->
+  <view class="item">
+    <view class="itemname">
+      <text>学号: </text><input type="text" placeholder="请输入学号" value="{{userInfo.studentId}}" bindinput="onStudentIdInput"/>
+    </view>
+  </view>
+
+  <!--性别-->
+  <view class="item">
+    <view class="itemname">
+      <text>性别: </text><input type="text" placeholder="请输入性别" value="{{userInfo.gender}}" bindinput="onGenderInput"/>
+    </view>
+  </view>
+  <view class="right">
+    <button bindtap="submitForm">保存</button>
+  </view>
+</view>

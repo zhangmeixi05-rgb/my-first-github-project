@@ -1,0 +1,14 @@
+<view class="container">
+  <block wx:for="{{items}}" wx:key="index">
+    <view class="item-container">
+      <view class="info-item">地点: {{item.location.name}}</view>
+      <view class="info-item">日期: {{item.date}}</view>
+      <view class="info-item">时间: {{item.time}}</view>
+      <button class="daohang-button" bindtap="navigateToDaohang" data-location="{{item.location}}">快速导航</button>
+      <view class="action-buttons">
+        <button class="edit-button" bindtap="editItem" data-index="{{index}}">编辑</button>
+        <button class="delete-button" bindtap="deleteItem" data-index="{{index}}">删除</button>
+      </view>
+    </view>
+  </block>
+</view>

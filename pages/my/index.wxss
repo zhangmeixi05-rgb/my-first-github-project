@@ -1,0 +1,147 @@
+/* pages/image/index.wxss */
+page {
+  /*设置底部安全距离*/
+padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
+padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
+background: #eeeeee;
+}
+.container{
+  background-color: #a7d3e8;
+  height : 35vh;
+}
+.partOne {
+  display: flex;
+  justify-content: space-between;
+  background-color: #a7d3e8;
+  padding-top: 0rpx;
+  padding-bottom: 130rpx;
+}
+.userinfo {
+  display: flex;
+  align-items: center;
+  height: 128rpx;
+  margin-left: 0rpx;
+  color: rgb(255, 255, 255);
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.userinfo-nickname {
+  height: 128rpx;
+}
+
+.partTwo{
+  height: 200rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: -50rpx;
+  background-color: #ffffff;
+  border: 1rpx solid rgb(176, 176, 176);
+  border-radius: 25rpx;
+}
+.partTwo .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+}
+.partTwo .item .itemname{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 210rpx;
+  margin-left: 20rpx;
+}
+.partTwo .item .itemname image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.partTwo .right{
+  margin-right: 20rpx;
+}
+.partTwo .right image{
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.partTwo .scan{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+}
+.partTwo .scan .itemname{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150rpx;
+  margin-left: 20rpx;
+}
+.partTwo .scan .itemname image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.partTwo .right{
+  margin-right: 20rpx;
+}
+.partTwo .right image{
+  width: 38rpx;
+  height: 38rpx;
+}
+.partTwo .imageSkip{
+  border: 1px solid rgba(0,0, 0, 0);
+  width: 38rpx;
+  margin-top: 0;
+}
+.partThree{
+  height: 300rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 10rpx;
+  background-color: #ffffff;
+  border: 1rpx solid rgb(176, 176, 176);
+  border-radius: 25rpx;
+}
+
+.partThree .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+}
+.partThree .item .itemname{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 210rpx;
+  margin-left: 20rpx;
+}
+.partThree .item .itemname image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.partThree .right{
+  margin-right: 20rpx;
+}
+.partThree .right image{
+  width: 38rpx;
+  height: 38rpx;
+}
+.partThree .imageSkip{
+  border: 1px solid rgba(0,0, 0, 0);
+  width: 38rpx;
+  margin-top: 0;
+}
+

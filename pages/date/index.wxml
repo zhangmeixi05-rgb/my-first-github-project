@@ -1,0 +1,29 @@
+<view class="search-bar">
+  <view class="search-text">
+    <input type="text" placeholder="请输入关键词..." bindinput="inputChange" />
+  </view>
+    <button bindtap="search" class="search-btn">搜索</button>
+</view>
+  <view class="container">
+  <view class="columns">
+    <view class="left-column">
+      <block wx:for="{{leftColumn}}" wx:key="id">
+        <view class="post" data-id="{{item._id}}" bindtap="viewDetail">
+          <image src="{{item.images[0]}}" mode="aspectFill"></image>
+          <text>{{item.title}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="right-column">
+      <block wx:for="{{rightColumn}}" wx:key="id">
+        <view class="post" data-id="{{item._id}}" bindtap="viewDetail">
+          <image src="{{item.images[0]}}" mode="aspectFill"></image>
+          <text>{{item.title}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{posts.length === 0}}">
+    <text>暂无帖子</text>
+  </view>
+</view>
