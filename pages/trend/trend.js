@@ -14,6 +14,15 @@ Page({
     emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
     emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
     emotionCounts: [0, 0, 0, 0, 0],
+    analysisText: '',
+    chartType: 'bar', // 'bar' | 'pie'
+    legendColors: ['#7EC8E3', '#FFB6C1', '#FF6347', '#FFD700', '#90EE90'],
+    totalEmotions: 0
+
+
+    emotionTypes: ['😊', '😞', '😠', '😱', '😌'],
+    emotionLabels: ['开心', '难过', '生气', '害怕', '平静'],
+    emotionCounts: [0, 0, 0, 0, 0],
 
     analysisText: '',
     chartType: 'bar', // bar | pie
@@ -98,6 +107,10 @@ Page({
     });
 
 
+
+    const totalEmotions = counts.reduce((a, b) => a + b, 0);
+
+
     const total = counts.reduce((a, b) => a + b, 0);
     const hasData = total > 0;
 
@@ -109,12 +122,63 @@ Page({
       analysisText
 
       analysisText,
+
+      totalEmotions
+
       hasData
 
     }, this.drawChart);
   },
 
   drawChart() {
+
+
+    if (this.data.chartType === 'pie') {
+      this.drawPieChart();
+      return;
+    }
+
+    const ctx = wx.createCanvasContext('trendCanvas', this);
+
+    const query = wx.createSelectorQuery();
+    query.select('.chart-canvas').boundingClientRect((rect) => {
+      if (!rect) return;
+
+      const canvasWidth = rect.width || 300;
+      const canvasHeight = rect.height || 300;
+      const { emotionCounts, emotionTypes, emotionLabels } = this.data;
+      const margin = 40;
+      const barWidth = 30;
+      const gap = 20;
+      const chartWidth = emotionCounts.length * (barWidth + gap) - gap;
+      const startX = (canvasWidth - chartWidth) / 2;
+      const maxCount = Math.max(...emotionCounts, 1);
+
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      for (let i = 0; i < emotionCounts.length; i++) {
+        const x = startX + i * (barWidth + gap);
+        const barHeight = (emotionCounts[i] / maxCount) * (canvasHeight - 2 * margin - 30);
+        const y = canvasHeight - margin - barHeight;
+
+        ctx.setFillStyle('#7EC8E3');
+        ctx.fillRect(x, y, barWidth, barHeight);
+
+        ctx.setFillStyle('#000000');
+        ctx.setFontSize(14);
+        ctx.fillText(emotionCounts[i], x + 5, y - 5);
+
+        // 显示 emoji 表情
+        ctx.setFontSize(16);
+        ctx.fillText(emotionTypes[i], x + 5, canvasHeight - 25);
+
+        // 显示情绪标签
+        ctx.setFontSize(10);
+        ctx.fillText(emotionLabels[i], x + 5, canvasHeight - 10);
+      }
+
+      ctx.draw();
+    }).exec();
 
     const ctx = wx.createCanvasContext('trendCanvas', this);
     const { emotionCounts, emotionTypes, emotionLabels, emotionColors, chartType } = this.data;
@@ -130,6 +194,7 @@ Page({
       ctx.setFontSize(16);
       ctx.fillText('本月暂无情绪记录', canvasWidth / 2 - 70, canvasHeight / 2);
       ctx.draw();
+
 
     const { hasData, chartType } = this.data;
 
@@ -421,5 +486,74 @@ Page({
       currentMonth++;
     }
     this.setData({ currentYear, currentMonth }, this.loadDataAndDraw);
+
+  },
+
+  switchChartType(e) {
+    const chartType = this.data.chartType === 'bar' ? 'pie' : 'bar';
+    this.setData({ chartType }, this.drawChart);
+  },
+
+  drawPieChart() {
+    const ctx = wx.createCanvasContext('trendCanvas', this);
+
+    const query = wx.createSelectorQuery();
+    query.select('.chart-canvas').boundingClientRect((rect) => {
+      if (!rect) return;
+
+      const canvasWidth = rect.width || 300;
+      const canvasHeight = rect.height || 300;
+      const { emotionCounts, legendColors, emotionLabels } = this.data;
+      const centerX = canvasWidth / 2;
+      const centerY = canvasHeight / 2;
+      const radius = Math.min(canvasWidth, canvasHeight) / 2 - 40;
+
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      const total = emotionCounts.reduce((a, b) => a + b, 0);
+      if (total === 0) return;
+
+      let currentAngle = -Math.PI / 2;
+
+      for (let i = 0; i < emotionCounts.length; i++) {
+        if (emotionCounts[i] === 0) continue;
+
+        const sliceAngle = (emotionCounts[i] / total) * 2 * Math.PI;
+        const endAngle = currentAngle + sliceAngle;
+
+        ctx.setFillStyle(legendColors[i]);
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, currentAngle, endAngle);
+        ctx.closePath();
+        ctx.fill();
+
+        // 计算标签位置（在扇形外侧）
+        const labelAngle = currentAngle + sliceAngle / 2;
+        const labelRadius = radius + 20;
+        const labelX = centerX + Math.cos(labelAngle) * labelRadius;
+        const labelY = centerY + Math.sin(labelAngle) * labelRadius;
+
+        ctx.setFillStyle('#000000');
+        ctx.setFontSize(12);
+        ctx.setTextAlign('center');
+        ctx.fillText(emotionLabels[i], labelX, labelY);
+
+        // 计算百分比标签位置（在扇形内部）
+        const percentRadius = radius / 2;
+        const percentX = centerX + Math.cos(labelAngle) * percentRadius;
+        const percentY = centerY + Math.sin(labelAngle) * percentRadius;
+
+        const percent = ((emotionCounts[i] / total) * 100).toFixed(1) + '%';
+        ctx.setFontSize(14);
+        ctx.fillText(percent, percentX, percentY);
+
+        currentAngle = endAngle;
+      }
+
+      ctx.draw();
+    }).exec();
+
+
   }
 });
