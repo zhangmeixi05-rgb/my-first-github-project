@@ -1,0 +1,22 @@
+<view class="container">
+  <block wx:for="{{newFriendRequests}}" wx:key="userId">
+    <view class="friend-request-item">
+      <view class="avatar-container">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+      </view>
+      <view class="nickname-container">
+        <text class="nickname">{{item.nickName}}</text>
+      </view>
+      <view class="reason-container">
+        <view class="form-item" style="color:#666;text-align: center;font-size: 28rpx">
+          验证消息：
+          <text class="reason">{{item.reason}}</text>
+        </view>
+      </view>
+      <view class="button-container">
+        <button bindtap="acceptRequest" data-request="{{item}}" class="action-button" style="background-color:#DDA0DD ;color:white">接受</button>
+        <button bindtap="rejectRequest" data-request="{{item}}" class="action-button" style="background-color:#B0C4DE ;color:white">拒绝</button>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,34 @@
+<view class="calendar-container">
+  <!-- 年月标题 -->
+  <view class="calendar-header">
+    <text class="calendar-title">{{currentYear}}年{{currentMonth}}月</text>
+    <view class="calendar-switch">
+      <button bindtap="prevMonth">上个月</button>
+      <button bindtap="nextMonth">下个月</button>
+    </view>
+  </view>
+
+  <!-- 星期标题 -->
+  <view class="calendar-weekdays">
+    <view class="weekday">日</view>
+    <view class="weekday">一</view>
+    <view class="weekday">二</view>
+    <view class="weekday">三</view>
+    <view class="weekday">四</view>
+    <view class="weekday">五</view>
+    <view class="weekday">六</view>
+  </view>
+
+  <!-- 日历内容 -->
+  <view class="calendar-grid">
+    <block wx:for="{{calendar}}" wx:key="index">
+      <view class="calendar-day" wx:if="{{item}}" bindtap="onDateClick" data-date="{{item.date}}">
+        <text>{{item.date}}</text>
+        <text class="emotion" wx:if="{{emotions[currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (item.date < 10 ? '0' + item.date : item.date)]}}">
+          {{emotions[currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (item.date < 10 ? '0' + item.date : item.date)]}}
+        </text>
+      </view>
+      <view class="calendar-day empty" wx:else></view>
+    </block>
+  </view>
+</view>

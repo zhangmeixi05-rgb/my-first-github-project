@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/register/index",
+    "pages/index/index",
+    "pages/message/index",
+    "pages/date/index",
+    "pages/my/index",
+    "pages/publish/index",
+    "pages/my_profile/index",
+    "pages/my_setting/index",
+    "pages/my_publish/index",
+    "pages/my_join/index",
+    "pages/my_favorite/index",
+    "pages/index/zixun/zixun",
+    "pages/index/daohang/daohang",
+    "pages/detail/detail",
+    "pages/chat/chat",
+    "pages/newfriends/index",
+    "pages/request-history/index",
+    "pages/track/track",
+    "pages/trend/trend"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/img/img1.jpg",
+        "selectedIconPath": "/img/img1.jpg",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/date/index",
+        "iconPath": "/img/img2.jpg",
+        "selectedIconPath": "/img/img2.jpg",
+        "text": "日程"
+      },
+      {
+        "pagePath": "pages/publish/index",
+        "iconPath": "/img/img3.jpg",
+        "selectedIconPath": "/img/img3.jpg",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/message/index",
+        "iconPath": "/img/img4.jpg",
+        "selectedIconPath": "/img/img4.jpg",
+        "text": "私信"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "/img/img5.jpg",
+        "selectedIconPath": "/img/img5.jpg",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于小程序定位"
+		}
+	}
+}

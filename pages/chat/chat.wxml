@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="messages">
+    <block wx:for="{{messages}}" wx:key="time">
+      <view class="message-item self" wx:if="{{item.from === userInfo.nickName}}">
+        <block wx:if="{{item.type === 'text'}}">
+          <text class="message-text right">{{item.content}}</text>
+        </block>
+        <block wx:else>
+          <image class="message-image right" src="{{item.content}}" mode="aspectFit" />
+        </block>
+        <image class="avatar right" src="{{item.avatar}}" />
+      </view>
+      <view class="message-item" wx:else>
+        <image class="avatar left" src="{{item.avatar}}" />
+        <block wx:if="{{item.type === 'text'}}">
+          <text class="message-text left">{{item.content}}</text>
+        </block>
+        <block wx:else>
+          <image class="message-image left" src="{{item.content}}" mode="aspectFit" />
+        </block>
+      </view>
+    </block>
+  </view>
+
+  <!-- TabBar -->
+  <view class="tabbar">
+    <input type="text" placeholder="请输入消息" value="{{inputContent}}" bindinput="onInput" class="tab-input" />
+    <image src="/img/chatp.jpg" mode="aspectFill" class="send-image tab-image" bindtap="chooseImage" />
+    <button bindtap="sendMessage" class="send-button tab-button">发送</button>
+  </view>
+</view>
