@@ -27,6 +27,28 @@ button {
   border-radius: 10rpx;
 }
 
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-canvas {
+  width: 600rpx;
+  height: 600rpx;
+  margin-top: 20rpx;
+}
+
+.switch-btn {
+  margin-top: 20rpx;
+  background-color: #7EC8E3;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+
 /* 图表类型切换 */
 .chart-type-switch {
   display: flex;
@@ -56,6 +78,7 @@ button {
 }
 
 /* 情绪分析区域 */
+
 .analysis-box {
   margin-top: 20rpx;
   padding: 20rpx;
