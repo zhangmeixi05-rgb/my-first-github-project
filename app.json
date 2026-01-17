@@ -17,7 +17,6 @@
     "pages/detail/detail",
     "pages/chat/chat",
     "pages/newfriends/index",
-    "pages/request-history/index",
     "pages/track/track",
     "pages/trend/trend"
   ],

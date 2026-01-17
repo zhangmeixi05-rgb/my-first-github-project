@@ -19,7 +19,6 @@
         <text class="nickname" style="position: relative; left: 112rpx; top: 91rpx">{{item.nickName}}</text>
       </view>
     </block>
-    <button bindtap="navigateToRequestHistory" style="position: relative; left: 130rpx; top: 150rpx; background-color: #E6E6FA; color: #53868B; font-size: 24rpx;">查看申请历史</button>
   </view>
 
   <view class="friends-list" style="position: relative; left: -8rpx; top: -110rpx">

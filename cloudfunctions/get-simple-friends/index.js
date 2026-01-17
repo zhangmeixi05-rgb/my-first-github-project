@@ -23,9 +23,9 @@ exports.main = async (event, context) => {
       avatarUrl: item.avatarUrl
     }));
 
-    return friends;
+    return { friends };
   } catch (err) {
     console.error('查询异常:', err);
-    return [];
+    return { friends: [], error: err.message };
   }
 };

@@ -1,8 +1,7 @@
 Page({
   data: {
     newFriendRequests: [],
-    userInfo: null,
-    loading: false
+    userInfo: null
   },
 
   onLoad() {
@@ -36,13 +35,9 @@ Page({
 
   // 接受好友请求
   acceptRequest(e) {
-    if (this.data.loading) return;
-    
     const request = e.currentTarget.dataset.request;
-    const { _id: requestId, userId: requesterId, avatarUrl, nickName, reason } = request;
+    const { _id: requestId, userId: requesterId, avatarUrl, nickName } = request;
     const self = this.data.userInfo;
-
-    this.setData({ loading: true });
 
     wx.cloud.callFunction({
       name: 'deal-request',
@@ -63,49 +58,23 @@ Page({
       success: res => {
         if (res.result && res.result.success) {
           wx.showToast({ title: '添加成功', icon: 'success' });
-          
-          this.sendFriendRequestToChat(reason, requesterId, nickName);
-          
-          setTimeout(() => {
-            wx.navigateBack({
-              delta: 1
-            });
-          }, 1000);
+          this.loadFriendRequests();
+
+          // 刷新我的好友页面
+          const pages = getCurrentPages();
+          const mySettingPage = pages.find(p => p.route === 'pages/my_setting/index');
+          if (mySettingPage) {
+            mySettingPage.loadFriends();
+          }
         } else {
           wx.showToast({ title: res.result.message || '添加失败', icon: 'none' });
-          this.setData({ loading: false });
         }
       },
       fail: err => {
         console.error('接受请求失败', err);
         wx.showToast({ title: '网络异常', icon: 'none' });
-        this.setData({ loading: false });
       }
     });
-  },
-
-  sendFriendRequestToChat(reason, friendId, friendNickName) {
-    const self = this.data.userInfo;
-    
-    if (!reason || reason.trim() === '') return;
-    
-    const db = wx.cloud.database();
-    db.collection('chat')
-      .add({
-        data: {
-          fromUserId: self._id,
-          toUserId: friendId,
-          message: reason,
-          type: 'text',
-          createTime: db.serverDate()
-        }
-      })
-      .then(res => {
-        console.log('好友申请消息已发送到聊天', res);
-      })
-      .catch(err => {
-        console.error('发送消息失败', err);
-      });
   },
 
   // 拒绝好友请求

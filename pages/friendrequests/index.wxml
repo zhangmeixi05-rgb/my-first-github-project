@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="section">
+    <text class="section-title">收到的请求</text>
+    <block wx:for="{{receivedRequests}}" wx:key="_id">
+      <view class="request-item">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+        <view class="info">
+          <text class="nickname">{{item.nickName}}</text>
+          <text class="reason" wx:if="{{item.reason}}">{{item.reason}}</text>
+          <text class="status {{item.status === 'accepted' ? 'status-accepted' : item.status === 'rejected' ? 'status-rejected' : 'status-pending'}}">
+            {{item.status === 'accepted' ? '已通过' : item.status === 'rejected' ? '已拒绝' : '待处理'}}
+          </text>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:if="{{receivedRequests.length === 0}}">暂无收到的请求</view>
+  </view>
+
+  <view class="section">
+    <text class="section-title">发出的请求</text>
+    <block wx:for="{{sentRequests}}" wx:key="_id">
+      <view class="request-item">
+        <image class="avatar" src="{{item.friendAvatar || '/img/default-avatar.png'}}"></image>
+        <view class="info">
+          <text class="nickname">{{item.friendNickName || '未知用户'}}</text>
+          <text class="reason">{{item.reason || '无理由'}}</text>
+          <text class="status {{item.status === 'accepted' ? 'status-accepted' : item.status === 'rejected' ? 'status-rejected' : 'status-pending'}}">
+            {{item.status === 'accepted' ? '已通过' : item.status === 'rejected' ? '已拒绝' : '待对方确认'}}
+          </text>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:if="{{sentRequests.length === 0}}">暂无发出的请求</view>
+  </view>
+</view>
