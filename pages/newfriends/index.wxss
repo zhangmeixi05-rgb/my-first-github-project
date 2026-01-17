@@ -1,4 +1,8 @@
 page {
+<<<<<<< HEAD
+=======
+  /* 设置底部安全距离 */
+>>>>>>> origin/main
   padding-bottom: calc(constant(safe-area-inset-bottom) + 170rpx);
   padding-bottom: calc(env(safe-area-inset-bottom) + 170rpx);
   background: #FFF0F5;
@@ -8,6 +12,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
+<<<<<<< HEAD
   width: 100%;
 }
 
@@ -55,16 +60,23 @@ page {
   display: flex;
   flex-direction: column;
   gap: 20rpx;
+=======
+>>>>>>> origin/main
 }
 
 .friend-request-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+<<<<<<< HEAD
   background-color: #fff;
   border-radius: 16rpx;
   padding: 24rpx;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+=======
+  margin-bottom: 20rpx;
+  width: 100%;
+>>>>>>> origin/main
 }
 
 .avatar-container {
@@ -115,6 +127,7 @@ page {
   font-size: 28rpx;
   margin: 0 10rpx;
 }
+<<<<<<< HEAD
 
 .empty {
   display: flex;
@@ -124,3 +137,5 @@ page {
   color: #999;
   font-size: 28rpx;
 }
+=======
+>>>>>>> origin/main

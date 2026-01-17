@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">我发出的申请</view>
+    <block wx:if="{{sentRequests.length > 0}}" wx:for="{{sentRequests}}" wx:key="_id">
+      <view class="request-item">
+        <image class="avatar" src="{{item.friendInfo.avatarUrl}}" mode="aspectFill"></image>
+        <view class="info">
+          <text class="nickname">{{item.friendInfo.nickName}}</text>
+          <text class="reason">验证消息：{{item.reason}}</text>
+          <text class="status">状态：{{item.isAgree === null ? '待处理' : (item.isAgree ? '已通过' : '已拒绝')}}</text>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-tip">暂无发出的申请</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">我收到的申请</view>
+    <block wx:if="{{receivedRequests.length > 0}}" wx:for="{{receivedRequests}}" wx:key="_id">
+      <view class="request-item">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+        <view class="info">
+          <text class="nickname">{{item.nickName}}</text>
+          <text class="reason">验证消息：{{item.reason}}</text>
+          <text class="status">状态：{{item.isAgree === null ? '待处理' : (item.isAgree ? '已通过' : '已拒绝')}}</text>
+        </view>
+        <view class="actions" wx:if="{{item.isAgree === null}}">
+          <button bindtap="acceptRequest" data-request="{{item}}" class="btn accept">接受</button>
+          <button bindtap="rejectRequest" data-request="{{item}}" class="btn reject">拒绝</button>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-tip">暂无收到的申请</view>
+  </view>
+</view>

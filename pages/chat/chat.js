@@ -25,10 +25,13 @@ Page({
     return [userId1, userId2].sort().join('_');
   },
 
+<<<<<<< HEAD
   onShow() {
     this.loadMessages();
   },
 
+=======
+>>>>>>> origin/main
   loadMessages() {
     const { userInfo, friendInfo } = this.data;
     if (!userInfo._id || !friendInfo.id) return;

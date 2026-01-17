@@ -1,9 +1,13 @@
 Page({
   data: {
     newFriendRequests: [],
+<<<<<<< HEAD
     rejectedRequests: [],
     userInfo: null,
     currentTab: 0
+=======
+    userInfo: null
+>>>>>>> origin/main
   },
 
   onLoad() {
@@ -15,6 +19,7 @@ Page({
     }
   },
 
+<<<<<<< HEAD
   onShow() {
     this.loadFriendRequests();
   },
@@ -43,13 +48,36 @@ Page({
     }).catch(err => {
       console.error('获取请求失败', err);
       wx.showToast({ title: '网络异常', icon: 'none' });
+=======
+  // 调用 friend-request 云函数获取待同意的请求
+  loadFriendRequests() {
+    const userId = this.data.userInfo._id;
+    wx.cloud.callFunction({
+      name: 'friend-request',
+      data: { userId },
+      success: res => {
+        if (res.result && res.result.success) {
+          this.setData({ newFriendRequests: res.result.data });
+        } else {
+          wx.showToast({ title: '加载请求失败', icon: 'none' });
+        }
+      },
+      fail: err => {
+        console.error('获取请求失败', err);
+        wx.showToast({ title: '网络异常', icon: 'none' });
+      }
+>>>>>>> origin/main
     });
   },
 
   // 接受好友请求
   acceptRequest(e) {
     const request = e.currentTarget.dataset.request;
+<<<<<<< HEAD
     const { _id: requestId, userId: requesterId, avatarUrl, nickName, reason } = request;
+=======
+    const { _id: requestId, userId: requesterId, avatarUrl, nickName } = request;
+>>>>>>> origin/main
     const self = this.data.userInfo;
 
     wx.cloud.callFunction({
@@ -69,6 +97,7 @@ Page({
         }
       },
       success: res => {
+<<<<<<< HEAD
         console.log('deal-request返回:', res);
         if (res.result && res.result.success) {
           wx.showToast({ title: '添加成功', icon: 'success' });
@@ -88,6 +117,18 @@ Page({
               }
             });
           }, 1500);
+=======
+        if (res.result && res.result.success) {
+          wx.showToast({ title: '添加成功', icon: 'success' });
+          this.loadFriendRequests();
+
+          // 刷新我的好友页面
+          const pages = getCurrentPages();
+          const mySettingPage = pages.find(p => p.route === 'pages/my_setting/index');
+          if (mySettingPage) {
+            mySettingPage.loadFriends();
+          }
+>>>>>>> origin/main
         } else {
           wx.showToast({ title: res.result.message || '添加失败', icon: 'none' });
         }
@@ -99,6 +140,7 @@ Page({
     });
   },
 
+<<<<<<< HEAD
   sendSystemMessage(friendId, friendNickName, reason) {
     const self = this.data.userInfo;
     const chat_id = [self._id, friendId].sort().join('_');
@@ -183,10 +225,14 @@ Page({
     });
   },
 
+=======
+  // 拒绝好友请求
+>>>>>>> origin/main
   rejectRequest(e) {
     const request = e.currentTarget.dataset.request;
     const { _id: requestId } = request;
 
+<<<<<<< HEAD
     const db = wx.cloud.database();
     
     db.collection('fellow').doc(requestId).update({
@@ -203,4 +249,26 @@ Page({
       wx.showToast({ title: '操作失败', icon: 'none' });
     });
   },
+=======
+    wx.cloud.callFunction({
+      name: 'deal-request',
+      data: {
+        requestId: requestId,
+        agree: false
+      },
+      success: res => {
+        if (res.result && res.result.success) {
+          wx.showToast({ title: '已拒绝', icon: 'none' });
+          this.loadFriendRequests();
+        } else {
+          wx.showToast({ title: res.result.message || '操作失败', icon: 'none' });
+        }
+      },
+      fail: err => {
+        console.error('拒绝请求失败', err);
+        wx.showToast({ title: '网络异常', icon: 'none' });
+      }
+    });
+  }
+>>>>>>> origin/main
 });

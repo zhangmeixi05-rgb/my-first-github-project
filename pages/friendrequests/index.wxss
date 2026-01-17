@@ -1,0 +1,88 @@
+.container {
+  padding: 20rpx;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #53868B;
+  border-bottom: 2rpx solid #79CDCD;
+  padding-bottom: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.request-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 15rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.info {
+  flex: 1;
+}
+
+.nickname {
+  display: block;
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 5rpx;
+}
+
+.reason {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 5rpx;
+}
+
+.status {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+.status-accepted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.request-item button {
+  width: 120rpx;
+  height: 60rpx;
+  background: #79CDCD;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  padding: 40rpx;
+}

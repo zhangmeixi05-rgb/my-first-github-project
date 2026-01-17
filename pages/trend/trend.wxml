@@ -7,7 +7,63 @@
     </view>
   </view>
 
+<<<<<<< HEAD
   <canvas canvas-id="trendCanvas" class="chart-canvas"></canvas>
+=======
+
+
+  <view class="chart-type-switch">
+    <button bindtap="switchChartType" class="chart-btn {{chartType === 'bar' ? 'active' : ''}}">柱状图</button>
+    <button bindtap="switchChartType" class="chart-btn {{chartType === 'pie' ? 'active' : ''}}">饼状图</button>
+  </view>
+
+  <view class="empty-state" wx:if="{{totalEmotions === 0}}">
+    <text class="empty-text">当月暂无情绪记录</text>
+  </view>
+  <canvas canvas-id="trendCanvas" class="chart-canvas" wx:if="{{totalEmotions > 0}}"></canvas>
+
+  <view class="legend" wx:if="{{chartType === 'pie' && totalEmotions > 0}}">
+    <view class="legend-item" wx:for="{{emotionTypes}}" wx:key="index">
+      <view class="legend-color" style="background-color: {{legendColors[index]}}"></view>
+      <text class="legend-label">{{emotionLabels[index]}}</text>
+    </view>
+
+  <view class="chart-container">
+    <canvas canvas-id="trendCanvas" class="chart-canvas"></canvas>
+    <button bindtap="switchChartType" class="switch-btn">
+      {{chartType === 'bar' ? '切换为饼状图' : '切换为柱状图'}}
+    </button>
+
+  </view>
+
+
+  <!-- 图表类型切换 -->
+  <view class="chart-type-switch">
+    <button
+      class="chart-btn {{chartType === 'bar' ? 'active' : ''}}"
+      data-type="bar"
+      bindtap="switchChartType"
+    >
+      柱状图
+    </button>
+    <button
+      class="chart-btn {{chartType === 'pie' ? 'active' : ''}}"
+      data-type="pie"
+      bindtap="switchChartType"
+    >
+      饼状图
+    </button>
+  </view>
+
+  <!-- 图表画布 -->
+  <canvas
+    canvas-id="trendCanvas"
+    class="chart-canvas"
+    style="width: 350px; height: 450px;"
+  ></canvas>
+
+  <!-- 情绪分析文本 -->
+>>>>>>> origin/main
 
   <view class="analysis-box">
     <text class="analysis-text">{{analysisText}}</text>

@@ -18,6 +18,7 @@ page {
   width: 100%;
 }
 
+<<<<<<< HEAD
 .system-message {
   display: flex;
   justify-content: center;
@@ -34,12 +35,19 @@ page {
   text-align: center;
 }
 
+=======
+>>>>>>> origin/main
 .message-item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+<<<<<<< HEAD
   margin-left: 5px;
   margin-right: 5px;
+=======
+  margin-left: 5px; /* 调整 message-item 左边距 */
+  margin-right: 5px; /* 调整 message-item 右边距 */
+>>>>>>> origin/main
 }
 
 .message-item.self {

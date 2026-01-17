@@ -27,12 +27,92 @@ button {
   border-radius: 10rpx;
 }
 
+<<<<<<< HEAD
 .chart-canvas {
   width: 100%;
   height: 400rpx;
   margin-top: 20rpx;
 }
 
+=======
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-canvas {
+  width: 600rpx;
+  height: 600rpx;
+  margin-top: 20rpx;
+}
+
+.switch-btn {
+  margin-top: 20rpx;
+  background-color: #7EC8E3;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+
+/* 图表类型切换 */
+.chart-type-switch {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.chart-btn {
+  background-color: #ccc;
+  color: white;
+  padding: 15rpx 30rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.chart-btn.active {
+  background-color: #7EC8E3;
+}
+
+/* 图表画布 */
+.chart-canvas {
+  width: 100%;
+  height: 600rpx;
+  margin-top: 20rpx;
+}
+
+/* 图例 */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+  margin-top: 20rpx;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.legend-color {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+
+.legend-label {
+  font-size: 24rpx;
+}
+
+/* 情绪分析区域 */
+
+>>>>>>> origin/main
 .analysis-box {
   margin-top: 20rpx;
   padding: 20rpx;
@@ -45,3 +125,22 @@ button {
   line-height: 1.6;
   white-space: pre-line;
 }
+<<<<<<< HEAD
+=======
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+  background-color: #f5f5f5;
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+}
+>>>>>>> origin/main
